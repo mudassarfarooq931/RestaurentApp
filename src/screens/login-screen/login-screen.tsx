@@ -93,7 +93,7 @@ const LoginScreen = memo(({}: IProps) => {
         <View style={styles.form}>
           <View style={styles.formHeader}>
             {/* <Image source={require('@images/ABHA.png')} style={styles.logo} /> */}
-            <Text style={styles.headerText}>Signup </Text>
+            <Text style={styles.headerText}>Signup</Text>
           </View>
 
           <Input
