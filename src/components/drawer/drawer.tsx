@@ -4,7 +4,9 @@ import {colors} from '@constants';
 import {DrawerItem} from '@react-navigation/drawer';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 import {DrawerActions} from '@react-navigation/native';
-import {RootState} from '@redux/store';
+import {setCurrentUser} from '@redux/slice/auth/auth-slice';
+import {setToastMessage} from '@redux/slice/toast-message/toast-message-slice';
+import store, {RootState} from '@redux/store';
 import React, {useState} from 'react';
 import {Alert, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -19,14 +21,15 @@ interface IDrawerContentProps {
 //-----------------------------------------------------------------
 const Drawer: React.FC<IDrawerContentProps> = ({navigation}) => {
   const [loading, setLoading] = useState(false);
-  const userId = useSelector((state: RootState) => state.auth.userId);
+  const dispatch = store.store.dispatch;
 
   const logout = () => {
     navigation?.dispatch(DrawerActions.closeDrawer());
 
     setTimeout(() => {
       setLoading(false);
-      Alert.alert('Logout Success');
+      dispatch(setCurrentUser(undefined));
+      dispatch(setToastMessage('Logout Success'));
     }, 1000);
     setLoading(true);
   };

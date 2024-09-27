@@ -1,7 +1,8 @@
 import {ButtonPrimary, Input} from '@components';
 import ProgressDialog from '@components/progress-dialog';
 import {colors, fonts, ScreenEnum} from '@constants';
-import {setToastMessage} from '@redux/slice/main/toast-message/toast-message-slice';
+import {setCurrentUser} from '@redux/slice/auth/auth-slice';
+import {setToastMessage} from '@redux/slice/toast-message/toast-message-slice';
 import store, {RootState} from '@redux/store';
 import React, {memo, useEffect, useRef, useState} from 'react';
 import {
@@ -81,6 +82,8 @@ const LoginScreen = memo(({}: IProps) => {
       dispatch(setToastMessage('Invalid email format.'));
       return;
     }
+
+    dispatch(setCurrentUser(email));
   };
 
   return (
@@ -88,7 +91,8 @@ const LoginScreen = memo(({}: IProps) => {
       showsVerticalScrollIndicator={false}
       style={styles.scroll}
       keyboardShouldPersistTaps={'handled'}
-      contentContainerStyle={styles.contentContainer}>
+      contentContainerStyle={styles.contentContainer}
+    >
       <View style={[styles.mainWrapper]}>
         <View style={styles.form}>
           <View style={styles.formHeader}>
@@ -113,7 +117,8 @@ const LoginScreen = memo(({}: IProps) => {
                   paddingHorizontal: 5,
                   borderTopRightRadius: 8,
                   borderBottomRightRadius: 5,
-                }}>
+                }}
+              >
                 <Ionicons name={'mail'} size={25} color={colors.white} />
               </TouchableOpacity>
             }
@@ -140,7 +145,8 @@ const LoginScreen = memo(({}: IProps) => {
                   paddingHorizontal: 8,
                   borderTopRightRadius: 8,
                   borderBottomRightRadius: 5,
-                }}>
+                }}
+              >
                 <Ionicons
                   name={showPass ? 'eye' : 'eye-off'}
                   size={20}
@@ -170,7 +176,8 @@ const LoginScreen = memo(({}: IProps) => {
               style={[
                 styles.linkText,
                 {fontFamily: fonts.MONTSERRAT_BOLD, color: colors.primary},
-              ]}>
+              ]}
+            >
               SignUp
             </Text>
           </TouchableOpacity>

@@ -1,5 +1,5 @@
 import {colors, fonts} from '@constants';
-import {setToastMessage} from '@redux/slice/main/toast-message/toast-message-slice';
+import {setToastMessage} from '@redux/slice/toast-message/toast-message-slice';
 import store, {RootState} from '@redux/store';
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet} from 'react-native';

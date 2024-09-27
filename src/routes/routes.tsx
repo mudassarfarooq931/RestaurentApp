@@ -9,26 +9,30 @@ import AuthNav from './auth/auth.routes';
 import MainDrawerNav from './main/drawer-nav.routes';
 import ToastView from '@components/toast-view';
 
-interface IProps {}
+interface IProps {
+  currentUser?: string;
+}
 
 const mapStateToProps = (state: RootState) => {
-  return {};
+  return {
+    currentUser: state.auth.currentUser,
+  };
 };
 
 //-----------------------------------------
-const Routes: React.FC<IProps> = ({}) => {
+const Routes: React.FC<IProps> = ({currentUser}) => {
   useEffect(() => {});
   return (
     <>
       <NavigationContainer
         ref={navigationRef}
         onReady={() => {
-          routeNameRef.current =
-            navigationRef?.current?.getCurrentRoute()?.name;
+          routeNameRef.current = navigationRef?.current?.getCurrentRoute()?.name;
           isReadyRef.current = true;
-        }}>
+        }}
+      >
         <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
-        {false ? (
+        {currentUser ? (
           <>
             <SafeAreaView style={{backgroundColor: colors.white}} />
             <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
