@@ -23,15 +23,15 @@ const Routes: React.FC<IProps> = ({}) => {
       <NavigationContainer
         ref={navigationRef}
         onReady={() => {
-          routeNameRef.current =
-            navigationRef?.current?.getCurrentRoute()?.name;
+          routeNameRef.current = navigationRef?.current?.getCurrentRoute()?.name;
           isReadyRef.current = true;
-        }}>
-        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+        }}
+      >
+        <StatusBar backgroundColor={colors.black} barStyle="dark-content" />
         {false ? (
           <>
-            <SafeAreaView style={{backgroundColor: colors.white}} />
-            <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
+            <SafeAreaView style={{backgroundColor: colors.black}} />
+            <SafeAreaView style={{flex: 1, backgroundColor: colors.black}}>
               <MainDrawerNav />
             </SafeAreaView>
           </>
