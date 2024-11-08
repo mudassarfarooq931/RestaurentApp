@@ -1,16 +1,16 @@
-import {Input, PrimaryHeader} from '@components';
+import {PrimaryHeader} from '@components';
 import {colors, ScreenEnum} from '@constants';
-import React, {useState, useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {
-  View,
-  Text,
   FlatList,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Keyboard,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import {navigate} from '../../../root-navigation';
 
@@ -25,7 +25,6 @@ const ChatScreen: React.FC = ({route}: any) => {
   const [messageText, setMessageText] = useState<string>('');
   const flatListRef = useRef<FlatList<IMessage>>(null);
   const {username, profileImage} = route?.params?.item;
-  console.log(username, profileImage);
 
   const sendMessage = () => {
     if (messageText.trim().length > 0) {
@@ -57,7 +56,8 @@ const ChatScreen: React.FC = ({route}: any) => {
         style={[
           styles.messageContainer,
           isUser ? styles.userMessage : styles.otherMessage,
-        ]}>
+        ]}
+      >
         <Text style={styles.messageText}>{item.text}</Text>
       </View>
     );
@@ -67,13 +67,9 @@ const ChatScreen: React.FC = ({route}: any) => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={90}>
-      <PrimaryHeader
-        imgShow={true}
-        title={username}
-        profileImage={profileImage}
-        onPress={() => navigate(ScreenEnum?.Inbox)}
-      />
+      keyboardVerticalOffset={90}
+    >
+      <PrimaryHeader title={username} />
       <FlatList
         ref={flatListRef}
         data={messages}

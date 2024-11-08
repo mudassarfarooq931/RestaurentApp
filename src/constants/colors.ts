@@ -34,6 +34,7 @@ export const darkerGray = '#999999';
 export const bell = '#FAF704';
 export const background = '#F5F5F5';
 export const highlightColor = '#e0e0e0';
+export const moderateBlue_middle = '#92ABC1';
 
 //---------------------------------
 export const light = {

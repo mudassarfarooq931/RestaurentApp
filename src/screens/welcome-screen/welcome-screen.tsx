@@ -1,19 +1,20 @@
-import {colors} from '@constants';
+import {colors, ScreenEnum} from '@constants';
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {navigate} from '../../../root-navigation';
 import {styles} from './styles';
 
 const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <Text style={styles.heading}>TRIM</Text>
+        <Text style={styles.heading}>BRIM</Text>
       </View>
       <View style={styles.bottom}>
         <View style={styles.top_row}>
-          <Text style={styles.title}>Welcome to Trim Burgers</Text>
+          <Text style={styles.title}>Welcome to Brim Burgers</Text>
           <MaterialIcons
             name="waving-hand"
             size={25}
@@ -26,7 +27,7 @@ const WelcomeScreen = () => {
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => {
-            console.log('hit...');
+            navigate(ScreenEnum.Map);
           }}
           style={styles.bottom_row}
         >

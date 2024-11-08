@@ -1,23 +1,49 @@
+import {DeviceUtil} from '@app-utils';
+import ToastView from '@components/toast-view';
 import {colors} from '@constants';
+import NetInfo from '@react-native-community/netinfo';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootState} from '@redux/store';
-import React, {useEffect} from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {HelperService} from '@services';
+import React, {memo, useEffect} from 'react';
+import {Platform, SafeAreaView, StatusBar} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import {connect} from 'react-redux';
 import {isReadyRef, navigationRef, routeNameRef} from '../../navigation-helper';
 import AuthNav from './auth/auth.routes';
 import MainDrawerNav from './main/drawer-nav.routes';
-import ToastView from '@components/toast-view';
 
-interface IProps {}
+interface IProps {
+  currentUser?: string;
+}
 
 const mapStateToProps = (state: RootState) => {
-  return {};
+  return {
+    currentUser: state.auth.currentUser,
+  };
 };
 
 //-----------------------------------------
-const Routes: React.FC<IProps> = ({}) => {
-  useEffect(() => {});
+const Routes = memo(({currentUser}: IProps) => {
+  useEffect(() => {
+    Platform.OS === 'android'
+      ? DeviceUtil.getInstance().checkAllPermissions()
+      : null;
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+
+    const unsubscribe = NetInfo?.addEventListener(state => {
+      HelperService?.getInstance()?.showNetworkStatus(
+        state.isConnected ? state.isConnected : false,
+      );
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <>
       <NavigationContainer
@@ -27,8 +53,8 @@ const Routes: React.FC<IProps> = ({}) => {
           isReadyRef.current = true;
         }}
       >
-        <StatusBar backgroundColor={colors.black} barStyle="dark-content" />
-        {false ? (
+        <StatusBar backgroundColor={colors.black} barStyle="light-content" />
+        {currentUser ? (
           <>
             <SafeAreaView style={{backgroundColor: colors.black}} />
             <SafeAreaView style={{flex: 1, backgroundColor: colors.black}}>
@@ -42,6 +68,6 @@ const Routes: React.FC<IProps> = ({}) => {
       <ToastView />
     </>
   );
-};
+});
 
 export default connect(mapStateToProps)(Routes);

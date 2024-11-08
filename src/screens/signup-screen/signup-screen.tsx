@@ -1,215 +1,140 @@
-import {ButtonPrimary, Input} from '@components';
+import {DeviceUtil} from '@app-utils';
+import {ButtonPrimary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
-import {colors, fonts, ScreenEnum} from '@constants';
-import {setToastMessage} from '@redux/slice/main/toast-message/toast-message-slice';
+import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
+import {setSignupLoading} from '@redux/slice/auth/auth-slice';
 import store, {RootState} from '@redux/store';
-import React, {memo, useEffect, useRef, useState} from 'react';
-import {
-  Image,
-  Keyboard,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  Animated,
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {connect, useDispatch} from 'react-redux';
+import {Formik} from 'formik';
+import React, {memo, useEffect} from 'react';
+import {Keyboard, Platform, Text, TouchableOpacity, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {connect} from 'react-redux';
 import {navigate} from '../../../root-navigation';
 import {styles} from './styles';
 
-interface IProps {}
+interface IProps {
+  signupLoading: boolean;
+}
 
 const mapStateToProps = (state: RootState) => {
-  return {};
+  return {
+    signupLoading: state.auth.signupLoading,
+  };
 };
 
-const SignupScreen = memo(({}: IProps) => {
-  const [fullName, setFullName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [showPass, setShowPass] = useState<boolean>(false);
-  const bounceValue = useRef(new Animated.Value(0)).current; // For bouncing animation
-
-  const dispatch = useDispatch();
+const SignupScreen = memo(({signupLoading}: IProps) => {
+  const dispatch = store.store.dispatch;
 
   useEffect(() => {
     Keyboard.dismiss();
+    dispatch(setSignupLoading(false));
 
     return () => {
       Keyboard.dismiss();
-      setFullName('');
-      setEmail('');
-      setPassword('');
     };
   }, []);
-  const triggerBounce = () => {
-    Animated.sequence([
-      Animated.timing(bounceValue, {
-        toValue: 10, // Move right by 10 units
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(bounceValue, {
-        toValue: -10, // Move left by 10 units
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(bounceValue, {
-        toValue: 0, // Back to initial position
-        duration: 100,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
 
-  const onSubmit = () => {
-    const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
-    if (!fullName || !email || !password) {
-      triggerBounce();
-      return dispatch(
-        setToastMessage(
-          `Please Enter ${
-            !fullName ? 'Full Name' : !email ? 'Email' : 'Password'
-          }.`,
-        ),
-      );
-    }
-
-    if (email.includes(' ')) {
-      triggerBounce();
-      return dispatch(setToastMessage('Email cannot contain spaces.'));
-    }
-
-    if (!emailRegex.test(email)) {
-      triggerBounce();
-      return dispatch(setToastMessage('Invalid email format.'));
-    }
+  const handleSignup = async (values: {
+    username: string;
+    email: string;
+    password: string;
+  }) => {
+    const {email, username, password} = values;
+    const deviceInfo = await DeviceUtil.getInstance().getDeviceInfo();
+    Keyboard.dismiss();
   };
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.scroll}
-      keyboardShouldPersistTaps={'handled'}
-      contentContainerStyle={styles.contentContainer}>
-      <View style={[styles.mainWrapper]}>
-        <View style={styles.form}>
-          <View style={styles.formHeader}>
-            {/* <Image source={require('@images/ABHA.png')} style={styles.logo} /> */}
-            <Text style={styles.headerText}>Signup </Text>
+    <View style={styles.container}>
+      <KeyboardAwareScrollView
+        style={styles.scroll}
+        keyboardShouldPersistTaps={'handled'}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={[styles.mainWrapper]}>
+          <View style={styles.top}>
+            <Text style={styles.heading}>BRIM</Text>
           </View>
+          <View style={styles.card}>
+            <View style={styles.form}>
+              <View style={styles.formHeader}>
+                <Text style={styles.headerText}>Welcome to Brim Burgers</Text>
+              </View>
 
-          <Input
-            style={styles.input}
-            onChangeText={setFullName}
-            value={fullName}
-            placeholder="Full Name"
-            textStyle={{color: colors.black}}
-            keyboardType={'ascii-capable'}
-            multiLine={false}
-            children={
-              <TouchableOpacity
-                activeOpacity={1}
-                style={{
-                  backgroundColor: colors.primary,
-                  justifyContent: 'center',
-                  paddingHorizontal: 5,
-                  borderTopRightRadius: 8,
-                  borderBottomRightRadius: 5,
-                }}>
-                <Ionicons
-                  name={'person-circle'}
-                  size={25}
-                  color={colors.white}
-                />
-              </TouchableOpacity>
-            }
-          />
-          <Input
-            style={styles.input}
-            onChangeText={setEmail}
-            value={email}
-            placeholder="Email address"
-            textStyle={{color: colors.black}}
-            keyboardType={'email-address'}
-            multiLine={false}
-            children={
-              <TouchableOpacity
-                activeOpacity={1}
-                style={{
-                  backgroundColor: colors.primary,
-                  justifyContent: 'center',
-                  paddingHorizontal: 5,
-                  borderTopRightRadius: 8,
-                  borderBottomRightRadius: 5,
-                }}>
-                <Ionicons name={'mail'} size={25} color={colors.white} />
-              </TouchableOpacity>
-            }
-          />
-
-          <Input
-            style={styles.input}
-            onChangeText={setPassword}
-            value={password}
-            placeholder="Password"
-            textStyle={{color: colors.black}}
-            secure={!showPass}
-            keyboardType={'ascii-capable'}
-            multiLine={false}
-            children={
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => {
-                  setShowPass(!showPass);
+              <Formik
+                initialValues={{
+                  username: '',
+                  email: '',
+                  password: '',
                 }}
-                style={{
-                  backgroundColor: colors.primary,
-                  justifyContent: 'center',
-                  paddingHorizontal: 8,
-                  borderTopRightRadius: 8,
-                  borderBottomRightRadius: 5,
-                }}>
-                <Ionicons
-                  name={showPass ? 'eye' : 'eye-off'}
-                  size={20}
-                  color={colors.white}
-                />
+                validationSchema={yupSchemas.SignupSchema}
+                onSubmit={handleSignup}
+              >
+                {({handleSubmit, handleChange, values, errors, touched}) => (
+                  <>
+                    <FormikInput
+                      isRequired
+                      name="username"
+                      label="Username"
+                      placeholder="Enter Username"
+                      keyboardType="default"
+                      value={values.username}
+                      onChangeText={handleChange('username')}
+                    />
+
+                    <FormikInput
+                      isRequired
+                      name="email"
+                      label="Email"
+                      placeholder="Enter Email"
+                      keyboardType="email-address"
+                      value={values.email}
+                      onChangeText={handleChange('email')}
+                    />
+
+                    <FormikInput
+                      isRequired
+                      name="password"
+                      label="Password"
+                      placeholder="Enter Password"
+                      secureTextEntry
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                      keyboardType={
+                        Platform.OS == 'ios' ? 'ascii-capable' : 'default'
+                      }
+                    />
+
+                    <ButtonPrimary
+                      checkNetwork={true}
+                      onPress={handleSubmit}
+                      title="Signup"
+                      style={styles.buttonContainerSave}
+                    />
+                  </>
+                )}
+              </Formik>
+            </View>
+            <View style={styles.linkContainer}>
+              <Text style={styles.linkText}>Already have an account? </Text>
+              <TouchableOpacity onPress={() => navigate(ScreenEnum?.Login)}>
+                <Text
+                  style={[
+                    styles.linkText,
+                    {fontFamily: fonts.MONTSERRAT_BOLD, color: colors.primary},
+                  ]}
+                >
+                  Login
+                </Text>
               </TouchableOpacity>
-            }
-          />
-
-          <Animated.View style={{transform: [{translateX: bounceValue}]}}>
-            <ButtonPrimary
-              onPress={() => {
-                Keyboard.dismiss();
-                setTimeout(() => {
-                  onSubmit();
-                }, 500);
-              }}
-              title="Signup"
-              style={styles.buttonContainerSave}
-            />
-          </Animated.View>
+            </View>
+          </View>
         </View>
-        <View style={styles.linkContainer}>
-          <Text style={styles.linkText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigate(ScreenEnum?.Login)}>
-            <Text
-              style={[
-                styles.linkText,
-                {fontFamily: fonts.MONTSERRAT_BOLD, color: colors.primary},
-              ]}>
-              Login
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
 
-      <ProgressDialog visible={false} />
-    </ScrollView>
+        {signupLoading && <ProgressDialog visible={signupLoading} />}
+      </KeyboardAwareScrollView>
+    </View>
   );
 });
 

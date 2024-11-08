@@ -1,5 +1,5 @@
 import {colors, fonts} from '@constants';
-import {setToastMessage} from '@redux/slice/main/toast-message/toast-message-slice';
+import {setToastMessage} from '@redux/slice/common/toast-message-slice';
 import store, {RootState} from '@redux/store';
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet} from 'react-native';
@@ -55,22 +55,22 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     marginTop: 15,
     zIndex: 99999999,
   },
   textStyle: {
-    color: colors.white,
+    color: colors.primary,
     fontSize: 14,
     lineHeight: 20,
     textAlign: 'center',
-    fontFamily: fonts.MONTSERRAT_REGULAR,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
   },
   darkContainer: {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary,
+    backgroundColor: colors.black,
     zIndex: 99999999,
   },
   darkTextStyle: {
@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     textAlign: 'center',
-    fontFamily: fonts.MONTSERRAT_REGULAR,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
   },
 });

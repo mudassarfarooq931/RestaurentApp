@@ -1,4 +1,5 @@
 import {colors, fonts} from '@constants';
+import {HelperService} from '@services';
 import React from 'react';
 import {
   StyleProp,
@@ -16,7 +17,7 @@ interface IButtonProps {
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
-  children?: JSX.Element;
+  checkNetwork?: boolean;
 }
 
 //----------------------------------------------------------------------------
@@ -26,15 +27,28 @@ const ButtonPrimary: React.FC<IButtonProps> = ({
   style,
   textStyle,
   disabled,
-  children,
+  checkNetwork,
 }) => {
   return (
     <TouchableOpacity
-      activeOpacity={0.9}
+      activeOpacity={0.6}
       disabled={disabled}
-      style={[styles.container, style]}
-      onPress={() => onPress && onPress()}>
-      {children}
+      style={[
+        styles.container,
+        disabled && {backgroundColor: colors.moderateBlue_middle},
+        style,
+      ]}
+      onPress={() => {
+        if (checkNetwork) {
+          const isNetwork = HelperService?.getInstance()?.isNetAvailable();
+          if (isNetwork) {
+            onPress && onPress();
+          }
+        } else {
+          onPress && onPress();
+        }
+      }}
+    >
       <Text style={[styles.title, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
@@ -45,12 +59,11 @@ export default ButtonPrimary;
 //------------------------------------
 const styles = StyleSheet.create({
   container: {
-    height: 48,
+    height: 45,
     paddingVertical: 12,
     paddingHorizontal: 12,
-    borderRadius: 5,
+    borderRadius: 8,
     backgroundColor: colors.primary,
-    flexDirection: 'row',
 
     ///////////---shadow---///////////
     shadowColor: colors.black,

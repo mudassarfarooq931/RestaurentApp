@@ -13,6 +13,27 @@ export type RejectState = {
     msg?: string;
   };
 };
+
+export type NetInfoState = {
+  isConnected: boolean;
+};
+
+export interface DropDownType {
+  label: string;
+  value: string;
+}
+
 export type ToastState = {
   message?: string;
+};
+
+export type MapState = {
+  city: string;
+  area: string;
+};
+
+export type AuthState = {
+  loading: boolean;
+  signupLoading: boolean;
+  currentUser?: any;
 };

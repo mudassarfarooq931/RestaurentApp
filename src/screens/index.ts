@@ -9,6 +9,7 @@ import MenuScreen from './menu-screen/menu-screen';
 import CartScreen from './cart-screen/cart-screen';
 import LikeScreen from './like-screen/like-screen';
 import ProductScreen from './product-screen/product-screen';
+import MapScreen from './map-screen/map-screen';
 
 export {
   WelcomeScreen,
@@ -22,4 +23,5 @@ export {
   LikeScreen,
   ProfileScreen,
   ContactScreen,
+  MapScreen,
 };
