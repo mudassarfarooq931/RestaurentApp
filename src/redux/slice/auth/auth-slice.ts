@@ -37,4 +37,5 @@ export const {
   setCurrentUser,
   clearAllAuthStates,
 } = authSlice.actions;
+
 export default authReducer;

@@ -1,6 +1,7 @@
 import {DeviceUtil} from '@app-utils';
 import {ButtonPrimary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
+
 import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
 import {setAuthLoading} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
@@ -9,6 +10,7 @@ import {Formik} from 'formik';
 import React, {memo, useEffect} from 'react';
 import {Keyboard, Platform, Text, TouchableOpacity, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 import {connect, useDispatch} from 'react-redux';
 import {navigate} from '../../../root-navigation';
 import {styles} from './styles';
@@ -55,6 +57,7 @@ const LoginScreen = memo(({loading}: IProps) => {
         <View style={[styles.mainWrapper]}>
           <View style={styles.top}>
             <Text style={styles.heading}>BRIM</Text>
+
           </View>
           <View style={styles.card}>
             <View style={styles.form}>

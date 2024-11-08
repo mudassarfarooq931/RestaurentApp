@@ -1,6 +1,9 @@
 import {PrimaryHeader} from '@components';
 import ProgressDialog from '@components/progress-dialog';
 import {colors, fonts} from '@constants';
+import {setCurrentUser} from '@redux/slice/auth/auth-slice';
+import {setToastMessage} from '@redux/slice/toast-message/toast-message-slice';
+import store from '@redux/store';
 import React, {useState} from 'react';
 import {
   Alert,
@@ -18,6 +21,8 @@ interface IProfileOption {
 }
 
 const ProfileScreen: React.FC = () => {
+  const dispatch = store.store.dispatch;
+
   const profileOptions: IProfileOption[] = [
     {label: 'Edit Profile', onPress: () => console.log('Edit Profile Pressed')},
     {label: 'Settings', onPress: () => console.log('Settings Pressed')},
@@ -27,7 +32,8 @@ const ProfileScreen: React.FC = () => {
       onPress: () => {
         setTimeout(() => {
           setLoading(false);
-          Alert.alert('Logout Success');
+          dispatch(setCurrentUser(undefined));
+          dispatch(setToastMessage('Logout Success'));
         }, 1000);
         setLoading(true);
         console.log('Logout Pressed');
@@ -47,7 +53,8 @@ const ProfileScreen: React.FC = () => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <View style={styles.profileContainer}>
           <Image
             source={{uri: 'https://randomuser.me/api/portraits/men/3.jpg'}} // Replace with your profile image URL
@@ -61,12 +68,14 @@ const ProfileScreen: React.FC = () => {
               activeOpacity={0.5}
               key={index}
               style={styles.optionButton}
-              onPress={option.onPress}>
+              onPress={option.onPress}
+            >
               <Text
                 style={[
                   styles.optionText,
                   option.label === 'Logout' && styles.logoutText,
-                ]}>
+                ]}
+              >
                 {option.label}
               </Text>
             </TouchableOpacity>

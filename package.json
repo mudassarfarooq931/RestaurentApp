@@ -16,6 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@glyw/react-native-tabbed-section-list": "^0.0.21",
     "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-native-community/blur": "^4.4.1",
     "@react-native-community/netinfo": "^11.4.1",
@@ -49,6 +50,8 @@
     "react-native-screens": "^3.34.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^15.7.1",
+    "react-native-swiper-flatlist": "^3.2.5",
+    "react-native-tabs-section-list": "^1.0.1",
     "react-native-toast-notifications": "^3.4.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-version-info": "^1.1.1",
@@ -62,6 +65,7 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@faker-js/faker": "^9.0.3",
     "@react-native/babel-preset": "0.75.3",
     "@react-native/eslint-config": "0.75.3",
     "@react-native/metro-config": "0.75.3",
