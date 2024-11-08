@@ -50,6 +50,7 @@
       "@services/*": ["services/*"],
       "@themes": ["themes"],
       "@themes/*": ["themes/*"],
+      "@app-utils": ["utils"],
       "@app-utils/*": ["utils/*"]
     },
     "allowSyntheticDefaultImports": true /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */,
