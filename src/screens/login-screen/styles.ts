@@ -1,25 +1,56 @@
 import {colors, fonts} from '@constants';
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   scroll: {
-    backgroundColor: colors.background,
+    flex: 1,
+    paddingVertical: 10,
+    backgroundColor: colors.black,
   },
   contentContainer: {
-    height: '100%',
+    paddingBottom: 10,
+  },
+  top: {
+    marginVertical: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  heading: {
+    fontFamily: fonts.MONTSERRAT_EXTRA_BOLD,
+    fontSize: 90,
+    alignSelf: 'center',
+    color: colors.white,
+    letterSpacing: 2,
   },
   mainWrapper: {
-    flex: 1,
     padding: 10,
     paddingTop: 0,
     justifyContent: 'center',
+    backgroundColor: colors.black,
+    width: '100%',
+  },
+  card: {
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+    backgroundColor: colors.white,
+
+    ///////////---shadow---///////////
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 2,
   },
   headerText: {
     fontFamily: fonts.MONTSERRAT_BOLD,
-    fontSize: 24,
+    fontSize: 20,
     paddingHorizontal: 15,
     paddingVertical: 5,
     marginTop: 15,
@@ -39,9 +70,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
-  },
-  input: {
-    marginBottom: 10,
   },
 
   buttonContainerSave: {

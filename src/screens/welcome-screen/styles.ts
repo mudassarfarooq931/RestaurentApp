@@ -2,84 +2,75 @@ import {colors, fonts} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  scroll: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-  contentContainer: {
-    height: '100%',
-    backgroundColor: 'red',
-  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: colors.background,
+    backgroundColor: colors.black,
   },
-  headerContainer: {
-    marginHorizontal: 10,
-    marginBottom: 10,
-    alignItems: 'center',
-  },
-  logo: {
-    height: 120,
-    width: 120,
-    resizeMode: 'contain',
-  },
-  headerText: {
-    fontFamily: fonts.MONTSERRAT_BOLD,
-    fontSize: 24,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    marginTop: 15,
-    color: colors.black,
-  },
-  secondaryHeading: {
-    fontFamily: fonts.MONTSERRAT_MEDIUM,
-    fontSize: 14,
-    paddingHorizontal: 10,
-    color: colors.black,
-  },
-  buttonContainer: {
-    marginVertical: 20,
-  },
-  buttonStyle: {
-    backgroundColor: colors.white,
-    marginHorizontal: 10,
-    height: 48,
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  buttonTextStyle: {
-    color: colors.white,
+  top: {
     flex: 1,
-    fontFamily: fonts.POPPINS_MEDIUM,
-  },
-  dividerContainer: {
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 25,
   },
-  divider: {
-    height: 1,
-    width: '43%',
-    backgroundColor: '#E3E5E5',
+  heading: {
+    fontFamily: fonts.MONTSERRAT_EXTRA_BOLD,
+    fontSize: 90,
+    alignSelf: 'center',
+    color: colors.white,
+    letterSpacing: 2,
   },
-  footerContainer: {
+  bottom: {
+    flex: 1.05,
+    backgroundColor: colors.white,
+    paddingHorizontal: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    elevation: 20,
+    paddingTop: 35,
+  },
+  top_row: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  title: {
+    paddingRight: 10,
+    color: colors.black,
+    fontFamily: fonts.MONTSERRAT_BOLD,
+    fontSize: 20,
+  },
+  subtitle: {
+    paddingRight: 10,
+    color: colors.black,
+    fontSize: 14,
+    paddingTop: 5,
+    paddingBottom: 30,
+  },
+  bottom_row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: colors.lighterGray,
+    borderRadius: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  circle_icon: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 10,
-    flexDirection: 'row',
+    backgroundColor: colors.white,
   },
-  footerText1: {
-    fontFamily: fonts.POPPINS_BOLD,
-    fontSize: 14,
-    marginLeft: 2,
+  txt: {
+    paddingLeft: 10,
     color: colors.black,
-  },
-  footerText2: {
-    fontFamily: fonts.POPPINS_MEDIUM,
-    fontSize: 14,
-    color: colors.black,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
+    fontSize: 16,
   },
 });

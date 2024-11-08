@@ -9,4 +9,7 @@ export enum ScreenEnum {
   Settings = 'Settings',
   Contacts = 'Contacts',
   Product = 'Product',
+  Map = 'Map',
+  Welcome = 'Welcome',
+  Inbox = 'Inbox',
 }

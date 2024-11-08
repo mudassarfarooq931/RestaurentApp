@@ -10,8 +10,8 @@
 		00E356F31AD99517003FC87E /* RestaurantAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RestaurantAppTests.m */; };
 		00EF85E10CD5488587B72ED5 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50ED83FE46A246E78C3C899F /* Montserrat-SemiBold.ttf */; };
 		0119A8F64A654CE183C662E7 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0D76DF46AEC49E08951C6BF /* Montserrat-LightItalic.ttf */; };
+		01A26E832CC822FE676329C5 /* Pods_RestaurantApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BD61DB9A8F7868E25A4319 /* Pods_RestaurantApp.framework */; };
 		0A01E1A9810742618913F08E /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71CBCF24B04D43758B99C2BD /* Poppins-MediumItalic.ttf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-RestaurantApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-RestaurantApp.a */; };
 		0D9766ACD5174040B56C04C5 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8669C54029F2456EA3B8982F /* Montserrat-ExtraLightItalic.ttf */; };
 		0DFBB2D921E847A9856B06A3 /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9E6BD01A1FC4234B57D7CBC /* Montserrat-ThinItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
@@ -35,7 +35,6 @@
 		5BE2DB244DC741D8B0720ACD /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64D2685BA151459D814CD1B1 /* Poppins-Medium.ttf */; };
 		5DA6DC94143249359C9DB821 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9BF00B3C0EB4D89BC64E35B /* Poppins-BoldItalic.ttf */; };
 		71EFE668D3264F77B1367C4F /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58628FF523F04CD783F7967E /* Poppins-ExtraBold.ttf */; };
-		7699B88040F8A987B510C191 /* libPods-RestaurantApp-RestaurantAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-RestaurantApp-RestaurantAppTests.a */; };
 		79A2E0FD3E3D4BE48ED3875C /* Lora-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F9283483BF0479C8902C37F /* Lora-BoldItalic.ttf */; };
 		7CA18D1605C946DA80BD3B31 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB138564B3DD42C7B600F39B /* Montserrat-SemiBoldItalic.ttf */; };
 		7D9A4F8C8DA74272A1E214DF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EFDF9E51E1846748E6C2144 /* Montserrat-Bold.ttf */; };
@@ -47,6 +46,7 @@
 		87F3385F17334316925BFA6D /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADDE51590FD8412AA70B8A56 /* Montserrat-ExtraBold.ttf */; };
 		8AD33F1A482D4506B863072A /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CAED07C52E24690901E800A /* Montserrat-Thin.ttf */; };
 		8DD7E84BCE57411D90EF8E9E /* Lora-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A15255C1AFA34034B1549489 /* Lora-Italic.ttf */; };
+		8EB14C826B2F04C3EEB34FE2 /* Pods_RestaurantApp_RestaurantAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB296B5EA48CA8BD67034FD2 /* Pods_RestaurantApp_RestaurantAppTests.framework */; };
 		92E683E8CA394224981A7471 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 057A61EFEA164003B2DE8E02 /* Poppins-BlackItalic.ttf */; };
 		A2377A08D0DA49EB8132E32D /* mmrtextb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D13583EBD3F741B5BD2B3AD4 /* mmrtextb.ttf */; };
 		A3D636BEAE36414FA548DE34 /* MMRText.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6E2D6359B394573A4BC11D4 /* MMRText.ttf */; };
@@ -83,6 +83,7 @@
 		050C0B34F61E42DF9903C694 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLightItalic.ttf"; path = "../src/utils/fonts/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		057A61EFEA164003B2DE8E02 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../src/utils/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		05BB41D904604CC4A48718B8 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../src/utils/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		05BD61DB9A8F7868E25A4319 /* Pods_RestaurantApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		133A7647FAFE41A0A75939E5 /* Lora-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Bold.ttf"; path = "../src/utils/fonts/Lora-Bold.ttf"; sourceTree = "<group>"; };
 		138EF6482CAD46679C6CA541 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/utils/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* RestaurantApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +93,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RestaurantApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RestaurantApp/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = RestaurantApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-RestaurantApp-RestaurantAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RestaurantApp-RestaurantAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CAED07C52E24690901E800A /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.ttf"; path = "../src/utils/fonts/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
 		30993E37D85E41DF81ECA1A3 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/utils/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		3123DE4B6BF640B18BB1508D /* Lora-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Regular.ttf"; path = "../src/utils/fonts/Lora-Regular.ttf"; sourceTree = "<group>"; };
@@ -107,7 +107,6 @@
 		5709B34CF0A7D63546082F79 /* Pods-RestaurantApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantApp.release.xcconfig"; path = "Target Support Files/Pods-RestaurantApp/Pods-RestaurantApp.release.xcconfig"; sourceTree = "<group>"; };
 		58628FF523F04CD783F7967E /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/utils/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-RestaurantApp-RestaurantAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantApp-RestaurantAppTests.debug.xcconfig"; path = "Target Support Files/Pods-RestaurantApp-RestaurantAppTests/Pods-RestaurantApp-RestaurantAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-RestaurantApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RestaurantApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFDF9E51E1846748E6C2144 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/utils/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		64D2685BA151459D814CD1B1 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/utils/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		664D6A118CF9453ABFA2177E /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../src/utils/fonts/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -124,6 +123,7 @@
 		9F73DB19D8824FBAAA1FC40F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/utils/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		A15255C1AFA34034B1549489 /* Lora-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Italic.ttf"; path = "../src/utils/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; };
 		A6E2D6359B394573A4BC11D4 /* MMRText.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MMRText.ttf; path = ../src/utils/fonts/MMRText.ttf; sourceTree = "<group>"; };
+		AB296B5EA48CA8BD67034FD2 /* Pods_RestaurantApp_RestaurantAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantApp_RestaurantAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADDE51590FD8412AA70B8A56 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../src/utils/fonts/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		AFC1D7B50AB14A72A7B71498 /* Lora-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-SemiBold.ttf"; path = "../src/utils/fonts/Lora-SemiBold.ttf"; sourceTree = "<group>"; };
 		B153704E40FA4B26ACE45B8F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/utils/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-RestaurantApp-RestaurantAppTests.a in Frameworks */,
+				8EB14C826B2F04C3EEB34FE2 /* Pods_RestaurantApp_RestaurantAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-RestaurantApp.a in Frameworks */,
+				01A26E832CC822FE676329C5 /* Pods_RestaurantApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,8 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-RestaurantApp.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-RestaurantApp-RestaurantAppTests.a */,
+				05BD61DB9A8F7868E25A4319 /* Pods_RestaurantApp.framework */,
+				AB296B5EA48CA8BD67034FD2 /* Pods_RestaurantApp_RestaurantAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -681,7 +681,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobologix.restaurantapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.brim;
 				PRODUCT_NAME = RestaurantApp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -708,7 +708,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobologix.restaurantapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.brim;
 				PRODUCT_NAME = RestaurantApp;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -766,6 +766,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD = "";
 				LDPLUSPLUS = "";
@@ -844,6 +855,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD = "";
 				LDPLUSPLUS = "";

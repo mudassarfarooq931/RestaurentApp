@@ -27,7 +27,7 @@ module.exports = {
           '@routes': './src/routes',
           '@screens': './src/screens',
           '@services': './src/services/',
-          '@app-utils': './src/utils',
+          '@app-utils': './src/utils/',
         },
         extensions: ['.js', '.ts', '.tsx', '.ios.js', '.android.js'],
       },
