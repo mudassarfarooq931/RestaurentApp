@@ -3,7 +3,7 @@ import {ButtonPrimary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
 
 import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
-import {setAuthLoading} from '@redux/slice/auth/auth-slice';
+import {setAuthLoading, setCurrentUser} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
 import {PrefManager} from '@services';
 import {Formik} from 'formik';
@@ -44,6 +44,8 @@ const LoginScreen = memo(({loading}: IProps) => {
 
     PrefManager.storeString('userEmail', JSON.stringify(email));
     PrefManager.storeString('userPassword', JSON.stringify(password));
+
+    dispatch(setCurrentUser({email, password}));
   };
 
   return (
@@ -57,7 +59,6 @@ const LoginScreen = memo(({loading}: IProps) => {
         <View style={[styles.mainWrapper]}>
           <View style={styles.top}>
             <Text style={styles.heading}>BRIM</Text>
-
           </View>
           <View style={styles.card}>
             <View style={styles.form}>

@@ -1,10 +1,7 @@
 import {colors, fonts} from '@constants';
-import React, {memo} from 'react';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import {DrawerActions, useNavigation} from '@react-navigation/native';
+import React, {memo} from 'react';
 import {
-  Image,
   StyleProp,
   StyleSheet,
   Text,
@@ -13,65 +10,90 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {goBack} from '../../root-navigation';
 
-interface IHeaderProps {
-  title?: string;
+// ----------------------------------------------------------------
+
+type IProps = {
+  title: string;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   children?: JSX.Element;
-}
+  isDrawer?: boolean;
+};
 
-const PrimaryHeader = memo(
-  ({title, style, textStyle, children}: IHeaderProps) => {
+// ----------------------------------------------------------------
+
+const CustomHeader = memo(
+  ({title, style, textStyle, children, isDrawer}: IProps) => {
     const navigation = useNavigation();
 
-    const openDrawer = () => {
-      navigation?.dispatch(DrawerActions.openDrawer());
+    const handlePress = () => {
+      if (isDrawer) {
+        navigation?.dispatch(DrawerActions.openDrawer());
+      } else {
+        goBack();
+      }
     };
 
     return (
-      <View style={[styles.headerContainer, style]}>
-        <TouchableOpacity onPress={openDrawer}>
+      <View style={[styles.container, style]}>
+        <TouchableOpacity activeOpacity={0.6} onPress={handlePress}>
           <MaterialCommunityIcons
-            name={'menu'}
+            style={styles.backIconWrapper}
+            name={isDrawer ? 'menu' : 'arrow-left'}
             size={30}
             color={colors.primary}
           />
         </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          {title ? (
-            <Text style={[styles.title, textStyle]}>{title}</Text>
-          ) : (
-            <Image
-              source={require('@images/ABHA.png')}
-              style={{height: 50, width: 50, resizeMode: 'contain'}}
-            />
-          )}
+
+        <View style={styles.headerWrapper}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={[styles.headerText, textStyle]}
+          >
+            {title}
+          </Text>
         </View>
-        {children}
+
+        {children ? children : <View style={styles.iconWrapper} />}
       </View>
     );
   },
 );
 
-export default PrimaryHeader;
+export default CustomHeader;
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 10,
+  container: {
+    height: 56,
+    elevation: 5,
+    paddingHorizontal: 16,
     backgroundColor: colors.white,
-    paddingVertical: 5,
-  },
-  titleContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  title: {
-    fontSize: 16,
-    color: colors.primary,
+  backIconWrapper: {
+    padding: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderRadius: 100,
+    width: 50,
+  },
+  headerWrapper: {
+    paddingHorizontal: '3%',
+  },
+  headerText: {
+    fontSize: 20,
     fontFamily: fonts.MONTSERRAT_BOLD,
-    // transform: [{rotate: '-90deg'}],
+    color: colors.black,
+    textTransform: 'uppercase',
+  },
+  iconWrapper: {
+    width: 50,
   },
 });

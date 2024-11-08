@@ -1,6 +1,6 @@
 import BackgroundBlurView from './blur-view';
 import ButtonPrimary from './button-primary';
-import DashboardHeader from './dashboard-header';
+import CustomImage from './custom-image';
 import Drawer from './drawer/drawer';
 import FormikInput from './formik-input';
 import Input from './input';
@@ -11,11 +11,11 @@ import ToastView from './toast-view';
 export {
   BackgroundBlurView,
   ButtonPrimary,
-  DashboardHeader,
   Drawer,
   Input,
   PrimaryHeader,
   Progress,
   ToastView,
   FormikInput,
+  CustomImage,
 };

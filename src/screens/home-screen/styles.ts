@@ -8,10 +8,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  header: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   wrapper: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -25,22 +21,12 @@ export const styles = StyleSheet.create({
     // backgroundColor: 'white', // Ensure it covers background elements
   },
   logo: {
-    height: 200,
-    width: 120,
-    resizeMode: 'contain',
+    borderRadius: 0,
+    height: '100%',
+    width: '100%',
   },
   cardImg: {
-    backgroundColor: colors.green,
     width: width,
-    // marginTop: 10,
-    // marginHorizontal: 10,
-    // width: '98%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // paddingVertical: 10,
-    // borderRadius: 10,
-    // shadowColor: colors.black,
-    // elevation: 10,
   },
   tabBar: {
     backgroundColor: '#fff',
