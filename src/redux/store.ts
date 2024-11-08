@@ -2,10 +2,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import 'immutable';
 import {persistReducer, persistStore} from 'redux-persist';
-import toastReducer from './slice/main/toast-message/toast-message-slice';
+import authReducer from './slice/auth/auth-slice';
+import toastReducer from './slice/toast-message/toast-message-slice';
 
 const rootReducer = combineReducers({
   toast: toastReducer,
+  auth: authReducer,
 });
 
 const persistConfig = {

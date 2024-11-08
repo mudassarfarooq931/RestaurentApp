@@ -16,3 +16,7 @@ export type RejectState = {
 export type ToastState = {
   message?: string;
 };
+
+export type AuthState = {
+  currentUser?: string;
+};
