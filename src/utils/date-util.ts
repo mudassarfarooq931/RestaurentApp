@@ -2,15 +2,11 @@ import {
   differenceInMinutes,
   differenceInSeconds,
   differenceInYears,
-  eachDayOfInterval,
-  endOfMonth,
   format,
   isAfter,
   isWeekend,
-  startOfMonth,
   sub,
 } from 'date-fns';
-import moment from 'moment';
 
 export class DateUtil {
   private static _instance: DateUtil;
@@ -27,18 +23,9 @@ export class DateUtil {
   private _appDateTimeFormatFirebae = 'd-MMM-yyyy hh:mm a';
   private _appDateTimeFormat = 'yyyy-MM-dd HH:mm a';
   private _appDateTimeFormatMail = 'HH:mm a, yyyy-MM-dd';
-  private _subscriptionDateTimeFormat = 'MM-dd-yyyy hh:mm a';
-  private _subscription24HourDateTimeFormat = 'MM-DD-yyyy hh:mm a';
-
   private _appTimeFormatDay = 'dd';
-  private _scheduleApiDateFormat = 'yyyy-MM-dd';
   private _newApiDateFormat = 'MM/dd/yyyy';
   private _newDateFormat = 'dd/MM/yyyy';
-  private _newOneApiDateFormat = 'yyyy/MM/dd';
-  private _messageChangeFormat = 'dd-MM-yyyy';
-  private _scheduleApiTimeFormat = 'hh:mm a  d-MMM-yyyy';
-  private _tier2blastTimeFormat = 'MM/dd/yyyy, hh:mm:ss a';
-  private _parentArivalTimeFormat = 'MM/dd/yyyy hh:mm:ss a';
 
   private constructor() {}
   public static getInstance = () => {
@@ -66,10 +53,6 @@ export class DateUtil {
     if (!date) return this._undefinedDate;
     return format(new Date(date), this._newDateFormat);
   };
-  public formatForNewApiDate = (date?: string) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._newOneApiDateFormat);
-  };
   public formatNew = (date?: string) => {
     if (!date) return this._undefinedDate;
     return format(new Date(date), this._newFormat);
@@ -87,11 +70,6 @@ export class DateUtil {
   public formatMillisToAppTime = (millis?: number) => {
     if (!millis) return this._undefinedDate;
     return format(new Date(millis), this._appTimeFormat);
-  };
-
-  public formatScheduleTime = (date?: string | Date | number) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._scheduleApiTimeFormat);
   };
 
   public formatApiDateToAppDate = (date?: string | Date) => {
@@ -127,18 +105,6 @@ export class DateUtil {
     if (!date) return this._undefinedDate;
     return format(new Date(date), this._appDateTimeFormatMail);
   };
-
-  public formatSubscriptionDateTime = (date?: string) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._subscriptionDateTimeFormat);
-  };
-
-  public formatSubscription24HourDateTime = (date?: string) => {
-    if (!date) return this._undefinedDate;
-    const utcDate = new Date(date + 'Z');
-    return moment(utcDate).format(this._subscription24HourDateTimeFormat);
-  };
-
   public formatApiDateToAppTimeDay = (date?: string) => {
     if (!date) return this._undefinedDate;
     return format(new Date(date), this._appTimeFormatDay);
@@ -147,46 +113,6 @@ export class DateUtil {
   public formatApiDateToAppDateTime = (date?: string | number) => {
     if (!date) return this._undefinedDate;
     return format(new Date(date), this._appDateTimeFormat);
-  };
-
-  public formatDateForCalendar = (date?: Date | number) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._scheduleApiDateFormat);
-  };
-
-  public formatDateForMessageChange = (date?: Date | number) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._messageChangeFormat);
-  };
-
-  public formatTier2blastTimeChange = (date?: string | number) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._tier2blastTimeFormat);
-  };
-  public formatParentArivalTimeChange = (date?: string | number) => {
-    if (!date) return this._undefinedDate;
-    return format(new Date(date), this._parentArivalTimeFormat);
-  };
-  public startOfMonth = (date?: Date | number) => {
-    if (!date) return this._undefinedDate;
-    return format(startOfMonth(date), this._scheduleApiDateFormat);
-  };
-
-  public endOfMonth = (date?: Date | number) => {
-    if (!date) return this._undefinedDate;
-    return format(endOfMonth(date), this._scheduleApiDateFormat);
-  };
-
-  public fullMonthdays = (
-    year: string,
-    month: string,
-    date?: Date | number,
-  ) => {
-    // if (!date) return this._undefinedDate;
-    return eachDayOfInterval({
-      start: startOfMonth(new Date(parseInt(year), parseInt(month) - 1, 1)),
-      end: endOfMonth(new Date(parseInt(year), parseInt(month) - 1, 1)),
-    }).map(date => format(date, this._scheduleApiDateFormat));
   };
 
   public getAge = (date?: string) => {

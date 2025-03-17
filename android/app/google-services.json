@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "708940338059",
+    "project_id": "restaurantapp-a748a",
+    "storage_bucket": "restaurantapp-a748a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708940338059:android:fd5efa9a13ce903f0a158e",
+        "android_client_info": {
+          "package_name": "com.restaurantapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708940338059-qckpdlcqa11h2ondcc14vevep3j214m6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIrbbLsElkZtukU7a939XiHhNWWqGmRiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708940338059-qckpdlcqa11h2ondcc14vevep3j214m6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "708940338059-88eafk6rfft0s4durs9bunp3opg4e2dv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.brim"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
