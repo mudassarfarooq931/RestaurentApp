@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "708940338059",
-    "project_id": "restaurantapp-a748a",
-    "storage_bucket": "restaurantapp-a748a.firebasestorage.app"
+    "project_number": "471002302246",
+    "project_id": "brimclone",
+    "storage_bucket": "brimclone.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:708940338059:android:fd5efa9a13ce903f0a158e",
+        "mobilesdk_app_id": "1:471002302246:android:6f79eb7fa895862dae23e7",
         "android_client_info": {
-          "package_name": "com.restaurantapp"
+          "package_name": "com.brim"
         }
       },
       "oauth_client": [
         {
-          "client_id": "708940338059-qckpdlcqa11h2ondcc14vevep3j214m6.apps.googleusercontent.com",
+          "client_id": "471002302246-n2m4vkerj4dnlnk2r0sgokmqfndhd106.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDIrbbLsElkZtukU7a939XiHhNWWqGmRiA"
+          "current_key": "AIzaSyD-DSZfmHzpIT2xR0R66hL2K0FrukSqlck"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "708940338059-qckpdlcqa11h2ondcc14vevep3j214m6.apps.googleusercontent.com",
+              "client_id": "471002302246-n2m4vkerj4dnlnk2r0sgokmqfndhd106.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "708940338059-88eafk6rfft0s4durs9bunp3opg4e2dv.apps.googleusercontent.com",
+              "client_id": "471002302246-882tu9nejm5ht068vknaeaadflv6c40u.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "org.brim"
+                "bundle_id": "com.brim"
               }
             }
           ]

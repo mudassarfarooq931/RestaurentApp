@@ -2,6 +2,7 @@
 
 #import "RNSplashScreen.h" 
 #import <Firebase.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
@@ -16,6 +17,10 @@
   [FIRApp configure];
   [RNSplashScreen show];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [GIDSignIn.sharedInstance handleURL:url];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

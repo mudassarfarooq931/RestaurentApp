@@ -1,16 +1,24 @@
 import {DeviceUtil} from '@app-utils';
-import {ButtonPrimary, FormikInput} from '@components';
+import {ButtonPrimary, ButtonSecondary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
 
-import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
+import config from '@app-configs';
+import {colors, fonts, Images, ScreenEnum, yupSchemas} from '@constants';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {setAuthLoading, setCurrentUser} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
-import {PrefManager} from '@services';
+import {PrefManager, SocialAuthSService} from '@services';
 import {Formik} from 'formik';
 import React, {memo, useEffect} from 'react';
-import {Keyboard, Platform, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Keyboard,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
 import {connect, useDispatch} from 'react-redux';
 import {navigate} from '../../../root-navigation';
 import {styles} from './styles';
@@ -27,10 +35,21 @@ const mapStateToProps = (state: RootState) => {
 
 const LoginScreen = memo(({loading}: IProps) => {
   const dispatch = useDispatch();
-
+  console.log(
+    config.GOOGLE_WEB_CLIENT_ID,
+    '..config.GOOGLE_WEB_CLIENT_ID..',
+    config.GOOGLE_IOS_CLIENT_ID,
+  );
   useEffect(() => {
     Keyboard.dismiss();
     dispatch(setAuthLoading(false));
+
+    GoogleSignin.configure({
+      scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
+      webClientId: `${config.GOOGLE_WEB_CLIENT_ID}`, // client ID of type WEB for your server (needed to verify user ID and offline access)
+      iosClientId: `${config.GOOGLE_IOS_CLIENT_ID}`,
+      offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    });
 
     return () => {
       Keyboard.dismiss();
@@ -48,14 +67,17 @@ const LoginScreen = memo(({loading}: IProps) => {
     dispatch(setCurrentUser({email, password}));
   };
 
+  const handleSocialAuth = (provider: string) => {
+    SocialAuthSService.getInstance().SocialSignUp(provider);
+  };
+
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView
         style={styles.scroll}
         keyboardShouldPersistTaps={'handled'}
         contentContainerStyle={styles.contentContainer}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         <View style={[styles.mainWrapper]}>
           <View style={styles.top}>
             <Text style={styles.heading}>BRIM</Text>
@@ -72,8 +94,7 @@ const LoginScreen = memo(({loading}: IProps) => {
                   password: '',
                 }}
                 validationSchema={yupSchemas.LoginSchema}
-                onSubmit={handleLogin}
-              >
+                onSubmit={handleLogin}>
                 {({handleSubmit, handleChange, values, errors, touched}) => (
                   <>
                     <FormikInput
@@ -105,6 +126,20 @@ const LoginScreen = memo(({loading}: IProps) => {
                       title="Login"
                       style={styles.buttonContainerSave}
                     />
+
+                    <ButtonSecondary
+                      style={styles.btnGoogle}
+                      onPress={() => {
+                        handleSocialAuth('google');
+                      }}
+                      children={
+                        <Image
+                          style={styles.googleIcon}
+                          source={Images.google_logo}
+                        />
+                      }
+                      title="Continue with Google"
+                    />
                   </>
                 )}
               </Formik>
@@ -116,8 +151,7 @@ const LoginScreen = memo(({loading}: IProps) => {
                   style={[
                     styles.linkText,
                     {fontFamily: fonts.MONTSERRAT_BOLD, color: colors.primary},
-                  ]}
-                >
+                  ]}>
                   SignUp
                 </Text>
               </TouchableOpacity>

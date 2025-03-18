@@ -1,4 +1,6 @@
 BASE_URL=https:/$()/jsonplaceholder.typicode.com
 ACCESS_KEY=2515928A-0F42-46E5-8033-645A3B057D56
+GOOGLE_WEB_CLIENT_ID=708940338059-qckpdlcqa11h2ondcc14vevep3j214m6.apps.googleusercontent.com
+GOOGLE_IOS_CLIENT_ID=708940338059-88eafk6rfft0s4durs9bunp3opg4e2dv.apps.googleusercontent.com
 ENV=development
 PRODUCTION=false

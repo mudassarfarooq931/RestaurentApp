@@ -1,4 +1,4 @@
-package com.restaurantapp
+package com.brim
 
 import android.annotation.SuppressLint
 import android.content.Intent

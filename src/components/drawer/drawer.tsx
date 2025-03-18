@@ -4,34 +4,37 @@ import {colors} from '@constants';
 import {DrawerItem} from '@react-navigation/drawer';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 import {DrawerActions} from '@react-navigation/native';
-import {setCurrentUser} from '@redux/slice/auth/auth-slice';
-import {setToastMessage} from '@redux/slice/toast-message/toast-message-slice';
+import {setAuthLoading} from '@redux/slice/auth/auth-slice';
 import store, {RootState} from '@redux/store';
-import React, {useState} from 'react';
-import {Alert, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {SocialAuthSService} from '@services';
+import React from 'react';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useDispatch, useSelector} from 'react-redux';
+import {connect} from 'react-redux';
 import styles from './styles';
 
 //-----------------------------
 interface IDrawerContentProps {
   navigation: DrawerNavigationHelpers;
+  loading: boolean;
 }
 
 //-----------------------------------------------------------------
-const Drawer: React.FC<IDrawerContentProps> = ({navigation}) => {
-  const [loading, setLoading] = useState(false);
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    loading: state.auth.loading,
+  };
+};
+
+//-----------------------------------------------------------------
+const Drawer: React.FC<IDrawerContentProps> = ({navigation, loading}) => {
   const dispatch = store.store.dispatch;
 
-  const logout = () => {
+  const logout = async () => {
+    dispatch(setAuthLoading(true));
     navigation?.dispatch(DrawerActions.closeDrawer());
-
-    setTimeout(() => {
-      setLoading(false);
-      dispatch(setCurrentUser(undefined));
-      dispatch(setToastMessage('Logout Success'));
-    }, 1000);
-    setLoading(true);
+    await SocialAuthSService?.getInstance()?.SocialSignOut();
   };
 
   return (
@@ -76,4 +79,4 @@ const Drawer: React.FC<IDrawerContentProps> = ({navigation}) => {
   );
 };
 
-export default Drawer;
+export default connect(mapStateToProps)(Drawer);

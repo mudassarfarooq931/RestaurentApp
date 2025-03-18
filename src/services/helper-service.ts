@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {clearAllAuthStates} from '@redux/slice/auth/auth-slice';
 import {clearAllMapState} from '@redux/slice/common/map-slice';
+import {setIsConnected} from '@redux/slice/common/net-info-slice';
 import {setToastMessage} from '@redux/slice/common/toast-message-slice';
 import {DropDownType} from '@redux/states';
-import {showMessage} from 'react-native-flash-message';
 import store from '@redux/store';
+import {showMessage} from 'react-native-flash-message';
 import * as Yup from 'yup';
-import {setIsConnected} from '@redux/slice/common/net-info-slice';
 
 export class HelperService {
   private static _instance: HelperService;
@@ -54,9 +54,9 @@ export class HelperService {
 
   clearAllStates = async () => {
     const dispatch = store.store.dispatch;
-
     dispatch(clearAllAuthStates());
     dispatch(clearAllMapState());
+    dispatch(setToastMessage('Logout Success'));
   };
 
   getLabel = (val?: string, list?: Array<DropDownType>) => {
@@ -127,5 +127,16 @@ export class HelperService {
         });
       }
     }
+  };
+
+  getUserFullName = (firstName: string, lastName: string) => {
+    const fullName =
+      firstName && lastName
+        ? firstName + ' ' + lastName
+        : firstName
+        ? firstName
+        : lastName;
+
+    return fullName;
   };
 }

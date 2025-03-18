@@ -18,6 +18,7 @@ export class UserDtoMapper extends DomainMapper<UserDto, User> {
       firstName: firstName,
       lastName: lastName,
       fullName: fullName,
+      userName: this.domainSafeValue(model.userName),
       email: this.domainSafeValue(model.email),
       roleId: this.domainSafeValue(model.roleId),
       roleName: this.domainSafeValue(model.roleName),
@@ -26,6 +27,8 @@ export class UserDtoMapper extends DomainMapper<UserDto, User> {
       address: this.domainSafeValue(model.address),
       authType: this.domainSafeValue(model.authType),
       mobile: this.domainSafeValue(model.mobile),
+      socialAuthToken: this.domainSafeValue(model.socialAuthToken),
+      imgUrl: this.domainSafeValue(model.imgUrl),
     };
   };
 

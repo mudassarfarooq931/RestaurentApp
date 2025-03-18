@@ -1,4 +1,4 @@
-package com.restaurantapp
+package com.brim
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity

@@ -92,4 +92,9 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 14,
   },
+  btnGoogle: {
+    backgroundColor: colors.black,
+    marginTop: 10,
+  },
+  googleIcon: {height: 20, width: 20, marginRight: 10},
 });

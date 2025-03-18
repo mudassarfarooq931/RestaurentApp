@@ -3,6 +3,7 @@ export type UserDto = {
   firstName: string;
   lastName: string;
   fullName: string;
+  userName: string;
   email: string;
   roleId: string;
   roleName: string;
@@ -11,4 +12,6 @@ export type UserDto = {
   address: string;
   authType: string;
   mobile: string;
+  socialAuthToken: string;
+  imgUrl: string;
 };

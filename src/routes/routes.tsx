@@ -49,10 +49,10 @@ const Routes = memo(({currentUser}: IProps) => {
       <NavigationContainer
         ref={navigationRef}
         onReady={() => {
-          routeNameRef.current = navigationRef?.current?.getCurrentRoute()?.name;
+          routeNameRef.current =
+            navigationRef?.current?.getCurrentRoute()?.name;
           isReadyRef.current = true;
-        }}
-      >
+        }}>
         <StatusBar backgroundColor={colors.black} barStyle="light-content" />
         {currentUser ? (
           <>

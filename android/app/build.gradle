@@ -93,14 +93,14 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
      flavorDimensions "environment"
 
-    namespace "com.restaurantapp"
+    namespace "com.brim"
     defaultConfig {
-        applicationId "com.restaurantapp"
+        applicationId "com.brim"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        resValue "string", "build_config_package", "com.restaurantapp"
+        resValue "string", "build_config_package", "com.brim"
     }
     signingConfigs {
         debug {

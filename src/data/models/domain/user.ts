@@ -3,6 +3,7 @@ export type User = {
   firstName: string;
   lastName: string;
   fullName: string;
+  userName: string;
   email: string;
   roleId: string;
   roleName: string;
@@ -11,4 +12,6 @@ export type User = {
   address: string;
   authType: string;
   mobile: string;
+  socialAuthToken: string;
+  imgUrl: string;
 };

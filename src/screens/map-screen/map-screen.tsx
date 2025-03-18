@@ -1,21 +1,20 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React, {memo, useEffect} from 'react';
-import {connect} from 'react-redux';
-import store, {RootState} from '@redux/store';
-import {styles} from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {ButtonPrimary, Input} from '@components';
 import {colors, ScreenEnum, yupSchemas} from '@constants';
-import {goBack, navigate} from '../../../root-navigation';
 import {
   clearAllMapState,
   setArea,
   setCity,
 } from '@redux/slice/common/map-slice';
-import {ButtonPrimary, Input} from '@components';
-import {HelperService} from '@services';
-import {formatDate} from 'date-fns';
 import {setToastMessage} from '@redux/slice/common/toast-message-slice';
+import store, {RootState} from '@redux/store';
+import {HelperService} from '@services';
+import React, {memo, useEffect} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {connect} from 'react-redux';
+import {goBack, navigate} from '../../../root-navigation';
+import {styles} from './styles';
 
 interface IProps {
   city: string;
@@ -45,16 +44,12 @@ const MapScreen = memo(({city, area}: IProps) => {
 
   const handleConfirmLocation = async () => {
     const formData = {city: city, address: area};
-    const {
-      data,
-      msg,
-      error,
-    } = await HelperService?.getInstance()?.isSchemaValid(
-      yupSchemas.MapSchema,
-      formData,
-    );
+    const {data, msg, error} =
+      await HelperService?.getInstance()?.isSchemaValid(
+        yupSchemas.MapSchema,
+        formData,
+      );
     if (data) {
-      dispatch(clearAllMapState());
       navigate(ScreenEnum.Login);
     } else {
       dispatch(setToastMessage(msg));
@@ -68,16 +63,14 @@ const MapScreen = memo(({city, area}: IProps) => {
           goBack();
         }}
         activeOpacity={0.6}
-        style={styles.btnBack}
-      >
+        style={styles.btnBack}>
         <Ionicons name="chevron-back" color={colors.black} size={22} />
       </TouchableOpacity>
       <View style={styles.bottom}>
         <TouchableOpacity
           style={styles.btnLocate}
           activeOpacity={0.6}
-          onPress={handleLocateMe}
-        >
+          onPress={handleLocateMe}>
           <Text style={styles.textLocate}>Locate Me</Text>
           <MaterialIcons name="my-location" color={colors.black} size={22} />
         </TouchableOpacity>
