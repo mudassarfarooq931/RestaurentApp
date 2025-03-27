@@ -1,9 +1,9 @@
-import {colors, fonts} from '@constants';
-import {Dimensions, StyleSheet} from 'react-native';
+import { colors, fonts } from '@constants';
+import { Dimensions, StyleSheet } from 'react-native';
 
-const {height} = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
-  safeArea: {flex: 1, backgroundColor: colors.white},
+  safeArea: { flex: 1, backgroundColor: colors.white },
   container: {
     flex: 1,
     paddingTop: height * 0.07,
