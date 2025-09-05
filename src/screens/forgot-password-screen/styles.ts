@@ -1,8 +1,7 @@
 import {colors, fonts} from '@constants';
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const {width, height} = Dimensions.get('window');
-
+//-------------------------------------
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -28,7 +27,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logoBackground: {
-    width: 200,
     height: 200,
     borderRadius: 100,
     backgroundColor: colors.primary,
@@ -48,15 +46,13 @@ export const styles = StyleSheet.create({
     fontSize: 48,
     color: colors.white,
     letterSpacing: 3,
-    textAlign: 'center',
+    marginBottom: 8,
   },
   tagline: {
     fontFamily: fonts.MONTSERRAT_MEDIUM,
     fontSize: 16,
     color: colors.white,
-    marginTop: 15,
-    opacity: 0.8,
-    letterSpacing: 1,
+    opacity: 0.9,
   },
   bottom: {
     flex: 1.2,
@@ -75,99 +71,50 @@ export const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 30,
   },
-  welcomeContent: {
+  contentContainer: {
+    flexGrow: 1,
+  },
+  formContent: {
     flex: 1,
   },
-  top_row: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginBottom: 10,
+  formHeader: {
+    marginBottom: 30,
   },
   title: {
-    paddingRight: 10,
     color: colors.black,
     fontFamily: fonts.MONTSERRAT_BOLD,
     fontSize: 24,
-    flex: 1,
+    marginBottom: 10,
   },
   subtitle: {
     color: colors.gray,
     fontSize: 16,
     lineHeight: 24,
-    marginBottom: 30,
     fontFamily: fonts.MONTSERRAT_MEDIUM,
   },
-  featuresContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 20,
-    paddingVertical: 20,
-    backgroundColor: colors.lighterGray,
-    borderRadius: 15,
-    paddingHorizontal: 10,
-  },
-  featureItem: {
-    alignItems: 'center',
+  form: {
     flex: 1,
   },
-  featureText: {
-    fontSize: 12,
-    color: colors.black,
-    fontFamily: fonts.MONTSERRAT_MEDIUM,
-    marginTop: 5,
-    textAlign: 'center',
+  inputContainer: {
+    marginBottom: 20,
   },
-  deliveryButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 20,
-    marginVertical: 20,
-    shadowColor: colors.primary,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 15,
-    elevation: 8,
+  buttonContainerSave: {
+    marginTop: 10,
+    marginBottom: 20,
+    borderRadius: 12,
   },
-  deliveryButtonContent: {
+  linkContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 25,
-  },
-  deliveryIconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 15,
+    marginTop: 25,
+    paddingTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: colors.lighterGray,
   },
-  deliveryTextContainer: {
-    flex: 1,
-  },
-  deliveryTitle: {
-    color: colors.white,
-    fontFamily: fonts.MONTSERRAT_BOLD,
-    fontSize: 18,
-    marginBottom: 2,
-  },
-  deliverySubtitle: {
-    color: colors.white,
+  linkText: {
     fontFamily: fonts.MONTSERRAT_MEDIUM,
-    fontSize: 14,
-    opacity: 0.9,
-  },
-  skipButton: {
-    alignItems: 'center',
-    paddingVertical: 15,
-  },
-  skipText: {
+    fontSize: 15,
     color: colors.gray,
-    fontFamily: fonts.MONTSERRAT_MEDIUM,
-    fontSize: 14,
   },
 });

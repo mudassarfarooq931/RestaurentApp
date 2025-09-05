@@ -2,13 +2,23 @@ import {DeviceUtil} from '@app-utils';
 import {ButtonPrimary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
 import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
-import {setSignupLoading} from '@redux/slice/auth/auth-slice';
-import store, {RootState} from '@redux/store';
+import {setCurrentUser, setSignupLoading} from '@redux/slice/auth/auth-slice';
+import {RootState} from '@redux/store';
+import {PrefManager} from '@services';
 import {Formik} from 'formik';
-import React, {memo, useEffect} from 'react';
-import {Keyboard, Platform, Text, TouchableOpacity, View} from 'react-native';
+import React, {memo, useEffect, useRef, useState} from 'react';
+import {
+  Animated,
+  Keyboard,
+  Platform,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {connect} from 'react-redux';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {connect, useDispatch} from 'react-redux';
 import {navigate} from '../../../root-navigation';
 import {styles} from './styles';
 
@@ -23,11 +33,29 @@ const mapStateToProps = (state: RootState) => {
 };
 
 const SignupScreen = memo(({signupLoading}: IProps) => {
-  const dispatch = store.store.dispatch;
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(30)).current;
 
   useEffect(() => {
     Keyboard.dismiss();
     dispatch(setSignupLoading(false));
+
+    // Animate screen entrance
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start();
 
     return () => {
       Keyboard.dismiss();
@@ -38,28 +66,63 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
     username: string;
     email: string;
     password: string;
+    confirmPassword: string;
   }) => {
     const {email, username, password} = values;
     const deviceInfo = await DeviceUtil.getInstance().getDeviceInfo();
     Keyboard.dismiss();
+
+    // Add loading state
+    dispatch(setSignupLoading(true));
+
+    // Simulate API call delay
+    setTimeout(() => {
+      PrefManager.storeString('userEmail', JSON.stringify(email));
+      PrefManager.storeString('userPassword', JSON.stringify(password));
+
+      dispatch(setCurrentUser({email, username, password}));
+      dispatch(setSignupLoading(false));
+    }, 2000);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.black} />
       <KeyboardAwareScrollView
         style={styles.scroll}
         keyboardShouldPersistTaps={'handled'}
         contentContainerStyle={styles.contentContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={[styles.mainWrapper]}>
+        showsVerticalScrollIndicator={false}>
+        <Animated.View
+          style={[
+            styles.mainWrapper,
+            {
+              opacity: fadeAnim,
+              transform: [{translateY: slideAnim}],
+            },
+          ]}>
           <View style={styles.top}>
-            <Text style={styles.heading}>BRIM</Text>
+            <View style={styles.logoContainer}>
+              <Text style={styles.heading}>BRIM</Text>
+              <Text style={styles.subtitle}>Join Our Community!</Text>
+            </View>
           </View>
+
           <View style={styles.card}>
             <View style={styles.form}>
               <View style={styles.formHeader}>
-                <Text style={styles.headerText}>Welcome to Brim Burgers</Text>
+                <Text style={styles.headerText}>Create Your Account</Text>
+                <Text style={styles.headerSubtext}>
+                  Fill in your details to get started
+                </Text>
               </View>
 
               <Formik
@@ -67,55 +130,135 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
                   username: '',
                   email: '',
                   password: '',
+                  confirmPassword: '',
                 }}
                 validationSchema={yupSchemas.SignupSchema}
-                onSubmit={handleSignup}
-              >
+                onSubmit={handleSignup}>
                 {({handleSubmit, handleChange, values, errors, touched}) => (
                   <>
-                    <FormikInput
-                      isRequired
-                      name="username"
-                      label="Username"
-                      placeholder="Enter Username"
-                      keyboardType="default"
-                      value={values.username}
-                      onChangeText={handleChange('username')}
-                    />
+                    <View style={styles.inputContainer}>
+                      <FormikInput
+                        isRequired
+                        name="username"
+                        label="Full Name"
+                        placeholder="Enter your full name"
+                        keyboardType="default"
+                        value={values.username}
+                        onChangeText={handleChange('username')}
+                        leftIcon={
+                          <MaterialCommunityIcons
+                            name="account-outline"
+                            size={20}
+                            color={colors.gray}
+                          />
+                        }
+                      />
+                    </View>
 
-                    <FormikInput
-                      isRequired
-                      name="email"
-                      label="Email"
-                      placeholder="Enter Email"
-                      keyboardType="email-address"
-                      value={values.email}
-                      onChangeText={handleChange('email')}
-                    />
+                    <View style={styles.inputContainer}>
+                      <FormikInput
+                        isRequired
+                        name="email"
+                        label="Email Address"
+                        placeholder="Enter your email"
+                        keyboardType="email-address"
+                        value={values.email}
+                        onChangeText={handleChange('email')}
+                        leftIcon={
+                          <MaterialCommunityIcons
+                            name="email-outline"
+                            size={20}
+                            color={colors.gray}
+                          />
+                        }
+                      />
+                    </View>
 
-                    <FormikInput
-                      isRequired
-                      name="password"
-                      label="Password"
-                      placeholder="Enter Password"
-                      secureTextEntry
-                      value={values.password}
-                      onChangeText={handleChange('password')}
-                      keyboardType={
-                        Platform.OS == 'ios' ? 'ascii-capable' : 'default'
-                      }
-                    />
+                    <View style={styles.inputContainer}>
+                      <FormikInput
+                        isRequired
+                        name="password"
+                        label="Password"
+                        placeholder="Create a password"
+                        secureTextEntry={!showPassword}
+                        value={values.password}
+                        onChangeText={handleChange('password')}
+                        keyboardType={
+                          Platform.OS == 'ios' ? 'ascii-capable' : 'default'
+                        }
+                        leftIcon={
+                          <MaterialCommunityIcons
+                            name="lock-outline"
+                            size={20}
+                            color={colors.gray}
+                          />
+                        }
+                        rightIcon={
+                          <TouchableOpacity onPress={togglePasswordVisibility}>
+                            <MaterialCommunityIcons
+                              name={showPassword ? 'eye-off' : 'eye'}
+                              size={20}
+                              color={colors.gray}
+                            />
+                          </TouchableOpacity>
+                        }
+                      />
+                    </View>
+
+                    <View style={styles.inputContainer}>
+                      <FormikInput
+                        isRequired
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        placeholder="Confirm your password"
+                        secureTextEntry={!showConfirmPassword}
+                        value={values.confirmPassword}
+                        onChangeText={handleChange('confirmPassword')}
+                        keyboardType={
+                          Platform.OS == 'ios' ? 'ascii-capable' : 'default'
+                        }
+                        leftIcon={
+                          <MaterialCommunityIcons
+                            name="lock-check-outline"
+                            size={20}
+                            color={colors.gray}
+                          />
+                        }
+                        rightIcon={
+                          <TouchableOpacity
+                            onPress={toggleConfirmPasswordVisibility}>
+                            <MaterialCommunityIcons
+                              name={showConfirmPassword ? 'eye-off' : 'eye'}
+                              size={20}
+                              color={colors.gray}
+                            />
+                          </TouchableOpacity>
+                        }
+                      />
+                    </View>
+
+                    <View style={styles.termsContainer}>
+                      <Text style={styles.termsText}>
+                        By signing up, you agree to our{' '}
+                        <Text style={styles.termsLink}>Terms of Service</Text>{' '}
+                        and <Text style={styles.termsLink}>Privacy Policy</Text>
+                      </Text>
+                    </View>
 
                     <ButtonPrimary
                       checkNetwork={true}
                       onPress={handleSubmit}
-                      title="Signup"
+                      title={
+                        signupLoading ? 'Creating Account...' : 'Create Account'
+                      }
                       style={styles.buttonContainerSave}
+                      disabled={signupLoading}
                     />
                   </>
                 )}
               </Formik>
             </View>
+
             <View style={styles.linkContainer}>
               <Text style={styles.linkText}>Already have an account? </Text>
               <TouchableOpacity onPress={() => navigate(ScreenEnum?.Login)}>
@@ -123,14 +266,13 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
                   style={[
                     styles.linkText,
                     {fontFamily: fonts.MONTSERRAT_BOLD, color: colors.primary},
-                  ]}
-                >
-                  Login
+                  ]}>
+                  Sign In
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Animated.View>
 
         {signupLoading && <ProgressDialog visible={signupLoading} />}
       </KeyboardAwareScrollView>

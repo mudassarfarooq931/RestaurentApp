@@ -1,10 +1,10 @@
 import {CustomImage, PrimaryHeader} from '@components';
 import {faker} from '@faker-js/faker';
 import React, {useEffect} from 'react';
-import {Dimensions, Image, Text, View} from 'react-native';
+import {Dimensions, Text, View} from 'react-native';
+import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import SectionList from 'react-native-tabs-section-list';
 import {styles} from './styles';
-import {SwiperFlatList} from 'react-native-swiper-flatlist';
 
 const SECTIONS = [
   {
@@ -67,23 +67,19 @@ const HomeScreen: React.FC = () => {
   const list = [
     {
       id: '1',
-      uri:
-        'https://plus.unsplash.com/premium_photo-1685314947151-074d2892c6ee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
+      uri: 'https://plus.unsplash.com/premium_photo-1685314947151-074d2892c6ee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
     },
     {
       id: '2',
-      uri:
-        'https://images.unsplash.com/photo-1460306855393-0410f61241c7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
+      uri: 'https://images.unsplash.com/photo-1460306855393-0410f61241c7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
     },
     {
       id: '3',
-      uri:
-        'https://images.unsplash.com/photo-1450152021501-598b36b17449?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTR8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
+      uri: 'https://images.unsplash.com/photo-1450152021501-598b36b17449?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTR8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
     },
     {
       id: '4',
-      uri:
-        'https://images.unsplash.com/photo-1485962307416-993e145b0d0d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
+      uri: 'https://images.unsplash.com/photo-1485962307416-993e145b0d0d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fHNsaWRlciUyMGZhc3QlMjBmb29kJTIwZGVhbHMlMjBob3Jpem9udGFsfGVufDB8fDB8fHww',
     },
   ];
 
@@ -113,14 +109,15 @@ const HomeScreen: React.FC = () => {
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderTab={({title, isActive}) => (
           <View
-            style={[styles.tabContainer, {borderBottomWidth: isActive ? 1 : 0}]}
-          >
+            style={[
+              styles.tabContainer,
+              {borderBottomWidth: isActive ? 1 : 0},
+            ]}>
             <Text
               style={[
                 styles.tabText,
                 {color: isActive ? '#090909' : '#9e9e9e'},
-              ]}
-            >
+              ]}>
               {title}
             </Text>
           </View>

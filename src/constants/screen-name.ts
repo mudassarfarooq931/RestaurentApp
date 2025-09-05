@@ -1,6 +1,8 @@
 export enum ScreenEnum {
   Login = 'Login',
   Signup = 'Signup',
+  ForgotPassword = 'ForgotPassword',
+  PasswordResetSuccess = 'PasswordResetSuccess',
   Home = 'Home',
   Chat = 'Chat',
   Calls = 'Calls',

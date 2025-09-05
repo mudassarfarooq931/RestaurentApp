@@ -9,16 +9,19 @@ import {setAuthLoading, setCurrentUser} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
 import {PrefManager, SocialAuthSService} from '@services';
 import {Formik} from 'formik';
-import React, {memo, useEffect} from 'react';
+import React, {memo, useEffect, useRef, useState} from 'react';
 import {
+  Animated,
   Image,
   Keyboard,
   Platform,
+  StatusBar,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {connect, useDispatch} from 'react-redux';
 import {navigate} from '../../../root-navigation';
 import {styles} from './styles';
@@ -35,14 +38,33 @@ const mapStateToProps = (state: RootState) => {
 
 const LoginScreen = memo(({loading}: IProps) => {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(30)).current;
+
   console.log(
     config.GOOGLE_WEB_CLIENT_ID,
     '..config.GOOGLE_WEB_CLIENT_ID..',
     config.GOOGLE_IOS_CLIENT_ID,
   );
+
   useEffect(() => {
     Keyboard.dismiss();
     dispatch(setAuthLoading(false));
+
+    // Animate screen entrance
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start();
 
     GoogleSignin.configure({
       scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
@@ -61,31 +83,57 @@ const LoginScreen = memo(({loading}: IProps) => {
     const deviceInfo = await DeviceUtil.getInstance().getDeviceInfo();
     Keyboard.dismiss();
 
-    PrefManager.storeString('userEmail', JSON.stringify(email));
-    PrefManager.storeString('userPassword', JSON.stringify(password));
+    // Add loading state
+    dispatch(setAuthLoading(true));
 
-    dispatch(setCurrentUser({email, password}));
+    // Simulate API call delay
+    setTimeout(() => {
+      PrefManager.storeString('userEmail', JSON.stringify(email));
+      PrefManager.storeString('userPassword', JSON.stringify(password));
+
+      dispatch(setCurrentUser({email, password}));
+      dispatch(setAuthLoading(false));
+    }, 1500);
   };
 
   const handleSocialAuth = (provider: string) => {
     SocialAuthSService.getInstance().SocialSignUp(provider);
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.black} />
       <KeyboardAwareScrollView
         style={styles.scroll}
         keyboardShouldPersistTaps={'handled'}
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}>
-        <View style={[styles.mainWrapper]}>
+        <Animated.View
+          style={[
+            styles.mainWrapper,
+            {
+              opacity: fadeAnim,
+              transform: [{translateY: slideAnim}],
+            },
+          ]}>
           <View style={styles.top}>
-            <Text style={styles.heading}>BRIM</Text>
+            <View style={styles.logoContainer}>
+              <Text style={styles.heading}>BRIM</Text>
+              <Text style={styles.subtitle}>Welcome Back!</Text>
+            </View>
           </View>
+
           <View style={styles.card}>
             <View style={styles.form}>
               <View style={styles.formHeader}>
-                <Text style={styles.headerText}>Welcome to Brim Burgers</Text>
+                <Text style={styles.headerText}>Sign In to Your Account</Text>
+                <Text style={styles.headerSubtext}>
+                  Enter your credentials to continue
+                </Text>
               </View>
 
               <Formik
@@ -97,53 +145,99 @@ const LoginScreen = memo(({loading}: IProps) => {
                 onSubmit={handleLogin}>
                 {({handleSubmit, handleChange, values, errors, touched}) => (
                   <>
-                    <FormikInput
-                      isRequired
-                      name="email"
-                      label="Email"
-                      placeholder="Enter Email"
-                      keyboardType="email-address"
-                      value={values.email}
-                      onChangeText={handleChange('email')}
-                    />
+                    <View style={styles.inputContainer}>
+                      <FormikInput
+                        isRequired
+                        name="email"
+                        label="Email Address"
+                        placeholder="Enter your email"
+                        keyboardType="email-address"
+                        value={values.email}
+                        onChangeText={handleChange('email')}
+                        leftIcon={
+                          <MaterialCommunityIcons
+                            name="email-outline"
+                            size={20}
+                            color={colors.gray}
+                          />
+                        }
+                      />
+                    </View>
 
-                    <FormikInput
-                      isRequired
-                      name="password"
-                      label="Password"
-                      placeholder="Enter Password"
-                      secureTextEntry
-                      value={values.password}
-                      onChangeText={handleChange('password')}
-                      keyboardType={
-                        Platform.OS == 'ios' ? 'ascii-capable' : 'default'
-                      }
-                    />
+                    <View style={styles.inputContainer}>
+                      <FormikInput
+                        isRequired
+                        name="password"
+                        label="Password"
+                        placeholder="Enter your password"
+                        secureTextEntry={!showPassword}
+                        value={values.password}
+                        onChangeText={handleChange('password')}
+                        keyboardType={
+                          Platform.OS == 'ios' ? 'ascii-capable' : 'default'
+                        }
+                        leftIcon={
+                          <MaterialCommunityIcons
+                            name="lock-outline"
+                            size={20}
+                            color={colors.gray}
+                          />
+                        }
+                        rightIcon={
+                          <TouchableOpacity onPress={togglePasswordVisibility}>
+                            <MaterialCommunityIcons
+                              name={showPassword ? 'eye-off' : 'eye'}
+                              size={20}
+                              color={colors.gray}
+                            />
+                          </TouchableOpacity>
+                        }
+                      />
+                    </View>
+
+                    <TouchableOpacity
+                      style={styles.forgotPassword}
+                      onPress={() => navigate(ScreenEnum.ForgotPassword)}>
+                      <Text style={styles.forgotPasswordText}>
+                        Forgot Password?
+                      </Text>
+                    </TouchableOpacity>
 
                     <ButtonPrimary
                       checkNetwork={true}
                       onPress={handleSubmit}
-                      title="Login"
+                      title={loading ? 'Signing In...' : 'Sign In'}
                       style={styles.buttonContainerSave}
+                      disabled={loading}
                     />
+
+                    <View style={styles.divider}>
+                      <View style={styles.dividerLine} />
+                      <Text style={styles.dividerText}>OR</Text>
+                      <View style={styles.dividerLine} />
+                    </View>
 
                     <ButtonSecondary
                       style={styles.btnGoogle}
                       onPress={() => {
                         handleSocialAuth('google');
                       }}
-                      children={
-                        <Image
-                          style={styles.googleIcon}
-                          source={Images.google_logo}
-                        />
-                      }
                       title="Continue with Google"
+                      textStyle={styles.googleButtonText}
+                      children={
+                        <View style={styles.googleButtonContent}>
+                          <Image
+                            style={styles.googleIcon}
+                            source={Images.google_logo}
+                          />
+                        </View>
+                      }
                     />
                   </>
                 )}
               </Formik>
             </View>
+
             <View style={styles.linkContainer}>
               <Text style={styles.linkText}>Don't have an account? </Text>
               <TouchableOpacity onPress={() => navigate(ScreenEnum?.Signup)}>
@@ -152,12 +246,12 @@ const LoginScreen = memo(({loading}: IProps) => {
                     styles.linkText,
                     {fontFamily: fonts.MONTSERRAT_BOLD, color: colors.primary},
                   ]}>
-                  SignUp
+                  Sign Up
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Animated.View>
 
         {loading && <ProgressDialog visible={loading} />}
       </KeyboardAwareScrollView>

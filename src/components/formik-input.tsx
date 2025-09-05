@@ -22,6 +22,8 @@ interface IInputProps extends TextInputProps {
   containerStyle?: StyleProp<ViewStyle>;
   keyboardType?: KeyboardTypeOptions;
   editable?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 //-------------------------------------
@@ -32,10 +34,18 @@ const FormikInput: React.FC<IInputProps> = ({
   containerStyle,
   keyboardType = 'default',
   editable = true,
+  leftIcon,
+  rightIcon,
   ...props
 }) => {
   const [field, meta, helpers] = useField(name);
   const [visible, setVisible] = useState<boolean>(!props.secureTextEntry);
+
+  // Add error boundary for Formik context
+  if (!field || !meta || !helpers) {
+    console.warn('FormikInput must be used within a Formik component');
+    return null;
+  }
 
   return (
     <>
@@ -46,19 +56,21 @@ const FormikInput: React.FC<IInputProps> = ({
         </Text>
       )}
       <View style={[styles.container, containerStyle]}>
+        {leftIcon && <View style={styles.leftIconContainer}>{leftIcon}</View>}
         <TextInput
           {...props}
           value={field.value}
           onChangeText={helpers.setValue}
           onBlur={() => helpers.setTouched(true)}
-          style={[styles.input, props.style]}
+          style={[styles.input, props.style, leftIcon && styles.inputWithLeftIcon]}
           secureTextEntry={!visible}
           placeholderTextColor={colors.lightGray}
           keyboardType={keyboardType}
           editable={editable}
           cursorColor={colors.black}
         />
-        {props?.secureTextEntry && (
+        {rightIcon && <View style={styles.rightIconContainer}>{rightIcon}</View>}
+        {props?.secureTextEntry && !rightIcon && (
           <Pressable onPress={() => setVisible(!visible)}>
             <Ionicons
               name={visible ? 'eye-outline' : 'eye-off-outline'}
@@ -81,40 +93,51 @@ export default FormikInput;
 //--------------------------------
 const styles = StyleSheet.create({
   container: {
-    height: 48,
-    borderRadius: 8,
-    paddingHorizontal: 10,
+    height: 50,
+    borderRadius: 12,
+    paddingHorizontal: 15,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.lighterGray,
     shadowColor: colors.black,
     shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     elevation: 2,
   },
   label: {
-    fontSize: 16,
-    fontFamily: fonts.POPPINS_MEDIUM,
+    fontSize: 14,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
     color: colors.black,
-    marginTop: 10,
+    marginBottom: 8,
   },
   requiredInput: {
     color: colors.black,
-    fontSize: 16,
-    marginTop: 10,
-    marginBottom: 3,
+    fontSize: 14,
+    marginBottom: 8,
   },
   input: {
     fontFamily: fonts.MONTSERRAT_MEDIUM,
     color: colors.black,
     flex: 1,
-    fontSize: 14,
+    fontSize: 16,
+  },
+  inputWithLeftIcon: {
+    marginLeft: 10,
+  },
+  leftIconContainer: {
+    marginRight: 5,
+  },
+  rightIconContainer: {
+    marginLeft: 10,
   },
   errorText: {
-    color: 'red',
+    color: colors.red,
     fontSize: 12,
-    marginTop: 2,
+    marginTop: 5,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
   },
   icon: {marginLeft: 5},
 });

@@ -6,6 +6,8 @@ export type AuthNavParamList = {
   Login: undefined;
   Welcome: undefined;
   Signup: undefined;
+  ForgotPassword: undefined;
+  PasswordResetSuccess: {email: string};
   Map: undefined;
 };
 
@@ -14,9 +16,8 @@ export type AuthRouteProp<T extends keyof AuthNavParamList> = RouteProp<
   T
 >;
 
-export type AuthNavigationProp<
-  T extends keyof AuthNavParamList
-> = NativeStackNavigationProp<AuthNavParamList, T>;
+export type AuthNavigationProp<T extends keyof AuthNavParamList> =
+  NativeStackNavigationProp<AuthNavParamList, T>;
 
 //------------------------------
 export type MainNavParamList = {
@@ -31,9 +32,8 @@ export type MainRouteProp<T extends keyof MainNavParamList> = RouteProp<
   T
 >;
 
-export type MainNavigationProp<
-  T extends keyof MainNavParamList
-> = NativeStackNavigationProp<MainNavParamList, T>;
+export type MainNavigationProp<T extends keyof MainNavParamList> =
+  NativeStackNavigationProp<MainNavParamList, T>;
 
 //------------------------------------
 export type BottomTabsNavParamList = {
@@ -50,10 +50,8 @@ export type DrawerNavParamList = {
   MainHome: undefined;
 };
 
-export type BottomTabsRouteProp<
-  T extends keyof BottomTabsNavParamList
-> = RouteProp<BottomTabsNavParamList, T>;
+export type BottomTabsRouteProp<T extends keyof BottomTabsNavParamList> =
+  RouteProp<BottomTabsNavParamList, T>;
 
-export type BottomTabsNavigationProp<
-  T extends keyof BottomTabsNavParamList
-> = NativeStackNavigationProp<BottomTabsNavParamList, T>;
+export type BottomTabsNavigationProp<T extends keyof BottomTabsNavParamList> =
+  NativeStackNavigationProp<BottomTabsNavParamList, T>;
