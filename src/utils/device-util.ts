@@ -1,5 +1,6 @@
 import Logger from '@services/log-service';
-import {Alert, Platform} from 'react-native';
+import ModalService from '@services/modal-service';
+import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import {
   check,
@@ -55,20 +56,23 @@ export class DeviceUtil {
           // statuses[MEDIA] === RESULTS.UNAVAILABLE ||
           statuses[NOTIFICATIONS] === RESULTS.UNAVAILABLE
         ) {
-          Alert?.alert('Error', 'Hardware is not available');
+          ModalService.getInstance().showError(
+            'Error',
+            'Hardware is not available',
+          );
         } else if (
           // statuses[CAMERA] === RESULTS.BLOCKED ||
           // statuses[MEDIA] === RESULTS.BLOCKED ||
           statuses[NOTIFICATIONS] === RESULTS.BLOCKED
         ) {
-          Alert?.alert(
+          ModalService.getInstance().showError(
             'Error',
             'Permission to access hardware was blocked, please grant manually',
           );
         } else {
           if (
             // statuses[CAMERA] === RESULTS.DENIED &&
-            statuses[NOTIFICATIONS] === RESULTS.DENIED
+            statuses[NOTIFICATIONS] !== RESULTS.GRANTED
             // statuses[MEDIA] === RESULTS.DENIED
           ) {
             requestMultiple(androidPermissions)?.then(newStatuses => {
@@ -79,12 +83,15 @@ export class DeviceUtil {
               ) {
                 callback && callback();
               } else {
-                Alert?.alert('Error', 'One of the permissions was not granted');
+                ModalService.getInstance().showError(
+                  'Error',
+                  'One of the permissions was not granted',
+                );
               }
             });
           } else if (
             // statuses[CAMERA] === RESULTS.DENIED ||
-            statuses[NOTIFICATIONS] === RESULTS.DENIED
+            statuses[NOTIFICATIONS] !== RESULTS.GRANTED
             // statuses[MEDIA] === RESULTS.DENIED
           ) {
             request(
@@ -117,9 +124,12 @@ export class DeviceUtil {
       checkMultiple(androidPermissions)?.then(statuses => {
         const [CAMERA] = androidPermissions;
         if (statuses[CAMERA] === RESULTS.UNAVAILABLE) {
-          Alert?.alert('Error', 'Hardware is not available');
+          ModalService.getInstance().showError(
+            'Error',
+            'Hardware is not available',
+          );
         } else if (statuses[CAMERA] === RESULTS.BLOCKED) {
-          Alert?.alert(
+          ModalService.getInstance().showError(
             'Error',
             'Permission to access hardware was blocked, please grant manually',
           );
@@ -168,7 +178,7 @@ export class DeviceUtil {
         // Simply return from the function or handle it differently
         return;
       } else if (result === RESULTS.BLOCKED) {
-        Alert?.alert(
+        ModalService.getInstance().showError(
           'Error',
           'Permission to access hardware was blocked, please grant manually',
         );
@@ -178,7 +188,10 @@ export class DeviceUtil {
             if (_result === RESULTS.GRANTED) {
               callback && callback();
             } else {
-              Alert?.alert('Error', 'One of the permissions was not granted');
+              ModalService.getInstance().showError(
+                'Error',
+                'One of the permissions was not granted',
+              );
             }
           });
         } else if (result === RESULTS.GRANTED) {

@@ -1,7 +1,7 @@
 import {DeviceUtil} from '@app-utils';
 import {ButtonPrimary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
-import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
+import {appEnums, colors, fonts, ScreenEnum, yupSchemas} from '@constants';
 import {setCurrentUser, setSignupLoading} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
 import {PrefManager} from '@services';
@@ -140,8 +140,8 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
                       <FormikInput
                         isRequired
                         name="username"
-                        label="Full Name"
-                        placeholder="Enter your full name"
+                        label={appEnums.FormLabel.FULL_NAME}
+                        placeholder={appEnums.FormPlaceholder.ENTER_FULL_NAME}
                         keyboardType="default"
                         value={values.username}
                         onChangeText={handleChange('username')}
@@ -159,8 +159,8 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
                       <FormikInput
                         isRequired
                         name="email"
-                        label="Email Address"
-                        placeholder="Enter your email"
+                        label={appEnums.FormLabel.EMAIL_ADDRESS}
+                        placeholder={appEnums.FormPlaceholder.ENTER_EMAIL}
                         keyboardType="email-address"
                         value={values.email}
                         onChangeText={handleChange('email')}
@@ -178,8 +178,8 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
                       <FormikInput
                         isRequired
                         name="password"
-                        label="Password"
-                        placeholder="Create a password"
+                        label={appEnums.FormLabel.PASSWORD}
+                        placeholder={appEnums.FormPlaceholder.ENTER_PASSWORD}
                         secureTextEntry={!showPassword}
                         value={values.password}
                         onChangeText={handleChange('password')}
@@ -209,8 +209,8 @@ const SignupScreen = memo(({signupLoading}: IProps) => {
                       <FormikInput
                         isRequired
                         name="confirmPassword"
-                        label="Confirm Password"
-                        placeholder="Confirm your password"
+                        label={appEnums.FormLabel.CONFIRM_PASSWORD}
+                        placeholder={appEnums.FormPlaceholder.ENTER_PASSWORD}
                         secureTextEntry={!showConfirmPassword}
                         value={values.confirmPassword}
                         onChangeText={handleChange('confirmPassword')}

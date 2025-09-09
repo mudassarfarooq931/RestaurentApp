@@ -39,12 +39,14 @@ const CustomHeader = memo(
 
     return (
       <View style={[styles.container, style]}>
-        <TouchableOpacity activeOpacity={0.6} onPress={handlePress}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={handlePress}
+          style={styles.backIconWrapper}>
           <MaterialCommunityIcons
-            style={styles.backIconWrapper}
             name={isDrawer ? 'menu' : 'arrow-left'}
-            size={30}
-            color={colors.primary}
+            size={24}
+            color={colors.white}
           />
         </TouchableOpacity>
 
@@ -52,8 +54,7 @@ const CustomHeader = memo(
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[styles.headerText, textStyle]}
-          >
+            style={[styles.headerText, textStyle]}>
             {title}
           </Text>
         </View>
@@ -68,32 +69,58 @@ export default CustomHeader;
 
 const styles = StyleSheet.create({
   container: {
-    height: 56,
-    elevation: 5,
-    paddingHorizontal: 16,
+    height: 64,
+    elevation: 3,
+    paddingHorizontal: 20,
     backgroundColor: colors.white,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGray,
   },
   backIconWrapper: {
-    padding: 1,
+    padding: 8,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.white,
-    borderRadius: 100,
-    width: 50,
+    justifyContent: 'center',
+    backgroundColor: colors.primary,
+    borderRadius: 24,
+    width: 48,
+    height: 48,
+    elevation: 1,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
   },
   headerWrapper: {
-    paddingHorizontal: '3%',
+    flex: 1,
+    paddingHorizontal: 16,
+    alignItems: 'center',
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: fonts.MONTSERRAT_BOLD,
     color: colors.black,
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
+    textAlign: 'center',
+    letterSpacing: 0.5,
   },
   iconWrapper: {
-    width: 50,
+    width: 48,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

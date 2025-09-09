@@ -3,65 +3,100 @@ import {Dimensions, StyleSheet} from 'react-native';
 
 const {height} = Dimensions.get('window');
 const styles = StyleSheet.create({
-  safeArea: {flex: 1, backgroundColor: colors.white},
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
   container: {
     flex: 1,
-    paddingTop: height * 0.07,
     backgroundColor: colors.white,
   },
-  userInfoSection: {
-    paddingStart: 20,
+  header: {
+    backgroundColor: colors.black,
+    paddingTop: 50,
+    paddingBottom: 30,
+    paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 50,
-  },
-  line: {
-    height: 0.5,
-    backgroundColor: colors.lightestGray,
-    marginBottom: 20,
-  },
-  userName: {
-    fontSize: 16,
-    color: colors.primary,
-    fontFamily: fonts.MONTSERRAT_BOLD,
-    paddingLeft: 10,
-  },
-  role: {
-    fontSize: 14,
-    color: colors.primary,
-    fontFamily: fonts.MONTSERRAT_MEDIUM,
-    paddingLeft: 10,
   },
   avatarWrapper: {
-    backgroundColor: colors.white,
-    borderRadius: 100,
+    backgroundColor: colors.primary,
+    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
     width: 50,
     height: 50,
-    borderWidth: 1,
-    borderColor: colors.primary,
+    marginRight: 15,
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 60,
-  },
-  drawerItemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  itemText: {
-    color: colors.primary,
+  avatarText: {
+    fontFamily: fonts.MONTSERRAT_BOLD,
     fontSize: 14,
+    color: colors.white,
+    letterSpacing: 1,
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: 18,
+    color: colors.white,
+    fontFamily: fonts.MONTSERRAT_BOLD,
+    marginBottom: 4,
+  },
+  userEmail: {
+    fontSize: 14,
+    color: colors.lightGray,
     fontFamily: fonts.MONTSERRAT_MEDIUM,
   },
-  caption: {
-    fontSize: 12,
+  menuSection: {
+    flex: 1,
+    paddingTop: 20,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    marginHorizontal: 15,
+    marginVertical: 2,
+    borderRadius: 12,
+    backgroundColor: colors.white,
+  },
+  menuText: {
+    fontSize: 16,
+    color: colors.black,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
+    marginLeft: 15,
+  },
+  logoutSection: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: colors.lighterGray,
+    marginBottom: 15,
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+  },
+  logoutText: {
+    fontSize: 16,
     color: colors.primary,
-    textAlign: 'center',
-    fontFamily: fonts.MONTSERRAT_BOLD,
-    paddingVertical: 10,
+    fontFamily: fonts.MONTSERRAT_MEDIUM,
+    marginLeft: 15,
   },
 });
 

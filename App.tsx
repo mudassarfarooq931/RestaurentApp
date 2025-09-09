@@ -1,3 +1,4 @@
+import {GlobalModal} from '@components';
 import store from '@redux/store';
 import Routes from '@routes/routes';
 import React from 'react';
@@ -11,6 +12,7 @@ function App(): React.JSX.Element {
       <Provider store={store.store}>
         <PersistGate loading={null} persistor={store.persistor}>
           <Routes />
+          <GlobalModal />
         </PersistGate>
       </Provider>
     </ToastProvider>

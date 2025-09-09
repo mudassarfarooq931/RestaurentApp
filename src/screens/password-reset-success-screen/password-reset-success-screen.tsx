@@ -1,5 +1,5 @@
 import {ButtonPrimary} from '@components';
-import {colors, ScreenEnum} from '@constants';
+import {appEnums, colors, ScreenEnum} from '@constants';
 import {AuthRouteProp} from '@routes/param-list';
 import React, {useEffect, useRef} from 'react';
 import {Animated, StatusBar, Text, TouchableOpacity, View} from 'react-native';
@@ -95,7 +95,7 @@ const PasswordResetSuccessScreen: React.FC<Props> = ({route}) => {
             },
           ]}>
           <ButtonPrimary
-            title="Back to Sign In"
+            title={appEnums.ButtonLabel.BACK_TO_LOGIN}
             onPress={handleBackToLogin}
             style={styles.button}
           />

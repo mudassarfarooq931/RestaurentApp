@@ -1,18 +1,17 @@
 import {PrimaryHeader} from '@components';
-import {colors, ScreenEnum} from '@constants';
+import {appEnums} from '@constants';
 import React, {useRef, useState} from 'react';
 import {
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {navigate} from '../../../root-navigation';
+import styles from './styles';
 
 interface IMessage {
   id: string;
@@ -56,8 +55,7 @@ const ChatScreen: React.FC = ({route}: any) => {
         style={[
           styles.messageContainer,
           isUser ? styles.userMessage : styles.otherMessage,
-        ]}
-      >
+        ]}>
         <Text style={styles.messageText}>{item.text}</Text>
       </View>
     );
@@ -67,8 +65,7 @@ const ChatScreen: React.FC = ({route}: any) => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={90}
-    >
+      keyboardVerticalOffset={90}>
       <PrimaryHeader title={username} />
       <FlatList
         ref={flatListRef}
@@ -86,70 +83,16 @@ const ChatScreen: React.FC = ({route}: any) => {
           style={styles.input}
           value={messageText}
           onChangeText={setMessageText}
-          placeholder="Type a message"
+          placeholder={appEnums.FormPlaceholder.TYPE_MESSAGE}
           multiline
         />
 
         <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
-          <Text style={styles.sendButtonText}>Send</Text>
+          <Text style={styles.sendButtonText}>{appEnums.ButtonLabel.SEND}</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-  messageContainer: {
-    marginBottom: 10,
-    padding: 10,
-    borderRadius: 10,
-    maxWidth: '80%',
-  },
-  userMessage: {
-    backgroundColor: '#0084ff',
-    alignSelf: 'flex-end',
-  },
-  otherMessage: {
-    backgroundColor: '#e5e5e5',
-    alignSelf: 'flex-start',
-  },
-  messageText: {
-    color: 'white',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    borderTopWidth: 1,
-    borderColor: '#e5e5e5',
-    backgroundColor: 'white',
-  },
-  input: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    fontSize: 16,
-    minHeight: 48,
-    maxHeight: 100,
-  },
-  sendButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 10,
-    padding: 10,
-    marginLeft: 10,
-  },
-  sendButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
 
 export default ChatScreen;

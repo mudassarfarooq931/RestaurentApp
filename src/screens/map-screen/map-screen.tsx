@@ -1,5 +1,5 @@
 import {ButtonPrimary} from '@components';
-import {colors, ScreenEnum, yupSchemas} from '@constants';
+import {appEnums, colors, ScreenEnum, yupSchemas} from '@constants';
 import {
   clearAllMapState,
   setArea,
@@ -242,7 +242,7 @@ const MapScreen = memo(({city, area}: IProps) => {
                 />
                 <TextInput
                   style={styles.textInput}
-                  placeholder="Enter city name"
+                  placeholder={appEnums.FormPlaceholder.ENTER_CITY_NAME}
                   value={city}
                   onChangeText={value => dispatch(setCity(value))}
                   placeholderTextColor={colors.lightGray}
@@ -260,7 +260,7 @@ const MapScreen = memo(({city, area}: IProps) => {
                 />
                 <TextInput
                   style={styles.textInput}
-                  placeholder="Enter area name"
+                  placeholder={appEnums.FormPlaceholder.ENTER_AREA_NAME}
                   value={area}
                   onChangeText={value => dispatch(setArea(value))}
                   placeholderTextColor={colors.lightGray}
@@ -272,7 +272,7 @@ const MapScreen = memo(({city, area}: IProps) => {
 
         {/* Confirm Button */}
         <ButtonPrimary
-          title="Confirm Location"
+          title={appEnums.ButtonLabel.CONFIRM_LOCATION}
           onPress={handleConfirmLocation}
           style={styles.btnConfirm}
           disabled={!city || !area}

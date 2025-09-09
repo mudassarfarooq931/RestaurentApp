@@ -1,3 +1,5 @@
+// TODO: Replace with actual data generation from API
+import {colors, orderEnums} from '@constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {clearAllAuthStates} from '@redux/slice/auth/auth-slice';
 import {clearAllMapState} from '@redux/slice/common/map-slice';
@@ -138,5 +140,225 @@ export class HelperService {
         : lastName;
 
     return fullName;
+  };
+
+  // TODO: Replace with actual menu item generation from API
+  generateMenuItem = (category?: string) => {
+    return {
+      id: '1',
+      title: 'Sample Item',
+      description: 'Sample description',
+      price: 10.99,
+      image: 'https://via.placeholder.com/800x600',
+      category: category || 'General',
+      rating: 4.0,
+      reviews: 0,
+      ingredients: [],
+      nutrition: {
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+        fat: 0,
+      },
+    };
+  };
+
+  // TODO: Replace with actual menu generation from API
+  generateFullMenu = (count = 30) => {
+    return Array.from({length: count}, () => this.generateMenuItem());
+  };
+
+  // Address Helper Functions
+  getAddressTypeIcon = (type: string) => {
+    switch (type) {
+      case 'home':
+        return 'home';
+      case 'work':
+        return 'briefcase';
+      case 'other':
+        return 'map-marker';
+      default:
+        return 'map-marker';
+    }
+  };
+
+  getAddressTypeColor = (type: string) => {
+    switch (type) {
+      case 'home':
+        return colors.primary;
+      case 'work':
+        return colors.primary;
+      case 'other':
+        return colors.primary;
+      default:
+        return colors.primary;
+    }
+  };
+
+  // Payment Method Helper Functions
+  getPaymentMethodIcon = (type: orderEnums.PaymentMethod) => {
+    switch (type) {
+      case orderEnums.PaymentMethod.CREDIT_CARD:
+        return 'credit-card';
+      case orderEnums.PaymentMethod.DEBIT_CARD:
+        return 'credit-card';
+      case orderEnums.PaymentMethod.PAYPAL:
+        return 'credit-card-outline';
+      case orderEnums.PaymentMethod.APPLE_PAY:
+        return 'cellphone';
+      case orderEnums.PaymentMethod.GOOGLE_PAY:
+        return 'cellphone';
+      case orderEnums.PaymentMethod.EASYPAISA:
+        return 'cellphone';
+      case orderEnums.PaymentMethod.JAZZCASH:
+        return 'cellphone';
+      case orderEnums.PaymentMethod.CASH:
+        return 'cash';
+      default:
+        return 'credit-card';
+    }
+  };
+
+  getPaymentMethodColor = (type: orderEnums.PaymentMethod) => {
+    switch (type) {
+      case orderEnums.PaymentMethod.CREDIT_CARD:
+      case orderEnums.PaymentMethod.DEBIT_CARD:
+        return colors.primary;
+      case orderEnums.PaymentMethod.PAYPAL:
+        return '#0070ba';
+      case orderEnums.PaymentMethod.APPLE_PAY:
+        return '#000000';
+      case orderEnums.PaymentMethod.GOOGLE_PAY:
+        return '#4285f4';
+      case orderEnums.PaymentMethod.EASYPAISA:
+        return '#00a651';
+      case orderEnums.PaymentMethod.JAZZCASH:
+        return '#ff6b35';
+      default:
+        return colors.primary;
+    }
+  };
+
+  getPaymentMethodDisplayName = (method: any) => {
+    switch (method.type) {
+      case orderEnums.PaymentMethod.CREDIT_CARD:
+      case orderEnums.PaymentMethod.DEBIT_CARD:
+        return `${method.brand} •••• ${method.last4}`;
+      case orderEnums.PaymentMethod.PAYPAL:
+        return method.name || 'PayPal';
+      case orderEnums.PaymentMethod.APPLE_PAY:
+        return 'Apple Pay';
+      case orderEnums.PaymentMethod.GOOGLE_PAY:
+        return 'Google Pay';
+      case orderEnums.PaymentMethod.EASYPAISA:
+        return method.name || 'EasyPaisa';
+      case orderEnums.PaymentMethod.JAZZCASH:
+        return method.name || 'JazzCash';
+      case orderEnums.PaymentMethod.CASH:
+        return 'Cash on Delivery';
+      default:
+        return 'Unknown Payment Method';
+    }
+  };
+
+  getPaymentMethodSubtitle = (method: any) => {
+    switch (method.type) {
+      case orderEnums.PaymentMethod.CREDIT_CARD:
+      case orderEnums.PaymentMethod.DEBIT_CARD:
+        return `Expires ${method.expiryMonth}/${method.expiryYear}`;
+      case orderEnums.PaymentMethod.PAYPAL:
+        return 'PayPal Account';
+      case orderEnums.PaymentMethod.APPLE_PAY:
+        return 'Apple Pay';
+      case orderEnums.PaymentMethod.GOOGLE_PAY:
+        return 'Google Pay';
+      case orderEnums.PaymentMethod.EASYPAISA:
+        return 'EasyPaisa Account';
+      case orderEnums.PaymentMethod.JAZZCASH:
+        return 'JazzCash Account';
+      case orderEnums.PaymentMethod.CASH:
+        return 'Pay when order arrives';
+      default:
+        return '';
+    }
+  };
+
+  // Validation Helper Functions
+  validatePhoneNumber = (phoneNumber: string) => {
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    return phoneRegex.test(phoneNumber);
+  };
+
+  validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  validateCreditCardNumber = (cardNumber: string) => {
+    // Remove spaces and dashes
+    const cleaned = cardNumber.replace(/[\s-]/g, '');
+    // Check if it's a valid credit card number (basic validation)
+    return /^\d{13,19}$/.test(cleaned);
+  };
+
+  formatCreditCardNumber = (cardNumber: string) => {
+    // Remove all non-digits
+    const cleaned = cardNumber.replace(/\D/g, '');
+    // Add spaces every 4 digits
+    return cleaned.replace(/(\d{4})(?=\d)/g, '$1 ');
+  };
+
+  formatExpiryDate = (expiryDate: string) => {
+    // Remove all non-digits
+    const cleaned = expiryDate.replace(/\D/g, '');
+    // Add slash after 2 digits
+    if (cleaned.length >= 2) {
+      return cleaned.substring(0, 2) + '/' + cleaned.substring(2, 4);
+    }
+    return cleaned;
+  };
+
+  // String Helper Functions
+  capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
+
+  // Date Helper Functions
+  formatDate = (date: Date, format: 'short' | 'long' | 'time' = 'short') => {
+    let options: Intl.DateTimeFormatOptions;
+
+    switch (format) {
+      case 'short':
+        options = {year: 'numeric', month: 'short', day: 'numeric'};
+        break;
+      case 'long':
+        options = {year: 'numeric', month: 'long', day: 'numeric'};
+        break;
+      case 'time':
+        options = {hour: '2-digit', minute: '2-digit'};
+        break;
+      default:
+        options = {year: 'numeric', month: 'short', day: 'numeric'};
+    }
+
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  };
+
+  getRelativeTime = (date: Date) => {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    if (diffInSeconds < 60) return 'Just now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+    if (diffInSeconds < 86400)
+      return `${Math.floor(diffInSeconds / 3600)}h ago`;
+    if (diffInSeconds < 2592000)
+      return `${Math.floor(diffInSeconds / 86400)}d ago`;
+    return this.formatDate(date, 'short');
   };
 }

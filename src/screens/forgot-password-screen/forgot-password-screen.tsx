@@ -1,5 +1,5 @@
 import {ButtonPrimary, FormikInput} from '@components';
-import {colors, fonts, ScreenEnum, yupSchemas} from '@constants';
+import {appEnums, colors, fonts, ScreenEnum, yupSchemas} from '@constants';
 import {setAuthLoading} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
 import {Formik} from 'formik';
@@ -127,8 +127,10 @@ const ForgotPasswordScreen: React.FC<Props> = ({loading}) => {
                       <FormikInput
                         isRequired
                         name="email"
-                        label="Email Address"
-                        placeholder="Enter your email address"
+                        label={appEnums.FormLabel.EMAIL_ADDRESS}
+                        placeholder={
+                          appEnums.FormPlaceholder.ENTER_EMAIL_ADDRESS
+                        }
                         keyboardType="email-address"
                         value={values.email}
                         onChangeText={handleChange('email')}

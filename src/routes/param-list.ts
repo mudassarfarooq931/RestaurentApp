@@ -1,3 +1,4 @@
+import {Product} from '@app-types';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -24,7 +25,21 @@ export type MainNavParamList = {
   BottomTabNav: undefined;
   Contacts: undefined;
   Chat: undefined;
-  Product: undefined;
+  Product: {product: Product};
+  Cart: undefined;
+  EditProfile: undefined;
+  OrderHistory: undefined;
+  OrderDetails: {order: any};
+  OngoingOrders: undefined;
+  Settings: undefined;
+  About: undefined;
+  PaymentMethods: undefined;
+  AddPaymentMethod: undefined;
+  EditPaymentMethod: {paymentMethod: any};
+  Addresses: undefined;
+  AddAddress: undefined;
+  EditAddress: {address: any};
+  HelpSupport: undefined;
 };
 
 export type MainRouteProp<T extends keyof MainNavParamList> = RouteProp<

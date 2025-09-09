@@ -3,7 +3,14 @@ import {ButtonPrimary, ButtonSecondary, FormikInput} from '@components';
 import ProgressDialog from '@components/progress-dialog';
 
 import config from '@app-configs';
-import {colors, fonts, Images, ScreenEnum, yupSchemas} from '@constants';
+import {
+  appEnums,
+  colors,
+  fonts,
+  Images,
+  ScreenEnum,
+  yupSchemas,
+} from '@constants';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {setAuthLoading, setCurrentUser} from '@redux/slice/auth/auth-slice';
 import {RootState} from '@redux/store';
@@ -149,8 +156,8 @@ const LoginScreen = memo(({loading}: IProps) => {
                       <FormikInput
                         isRequired
                         name="email"
-                        label="Email Address"
-                        placeholder="Enter your email"
+                        label={appEnums.FormLabel.EMAIL_ADDRESS}
+                        placeholder={appEnums.FormPlaceholder.ENTER_EMAIL}
                         keyboardType="email-address"
                         value={values.email}
                         onChangeText={handleChange('email')}
@@ -168,8 +175,8 @@ const LoginScreen = memo(({loading}: IProps) => {
                       <FormikInput
                         isRequired
                         name="password"
-                        label="Password"
-                        placeholder="Enter your password"
+                        label={appEnums.FormLabel.PASSWORD}
+                        placeholder={appEnums.FormPlaceholder.ENTER_PASSWORD}
                         secureTextEntry={!showPassword}
                         value={values.password}
                         onChangeText={handleChange('password')}
@@ -222,7 +229,7 @@ const LoginScreen = memo(({loading}: IProps) => {
                       onPress={() => {
                         handleSocialAuth('google');
                       }}
-                      title="Continue with Google"
+                      title={appEnums.ButtonLabel.CONTINUE}
                       textStyle={styles.googleButtonText}
                       children={
                         <View style={styles.googleButtonContent}>

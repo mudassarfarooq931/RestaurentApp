@@ -65,7 +65,7 @@ const Routes = memo(({currentUser}: IProps) => {
           <AuthNav />
         )}
       </NavigationContainer>
-      <ToastView />
+      <ToastView dark={currentUser ? false : true} />
     </>
   );
 });

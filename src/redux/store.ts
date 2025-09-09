@@ -3,12 +3,19 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import 'immutable';
 import {persistReducer, persistStore} from 'redux-persist';
 import {authReducer, mapReducer, netInfoReducer, toastReducer} from './slice';
+import cartReducer from './slice/cart/cart-slice';
+import favoritesReducer from './slice/favorites/favorites-slice';
+import {ordersReducer, orderSummaryReducer} from './slice/orders';
 
 const rootReducer = combineReducers({
   toast: toastReducer,
   auth: authReducer,
   map: mapReducer,
   netInfo: netInfoReducer,
+  cart: cartReducer,
+  favorites: favoritesReducer,
+  orders: ordersReducer,
+  orderSummary: orderSummaryReducer,
 });
 
 const persistConfig = {
